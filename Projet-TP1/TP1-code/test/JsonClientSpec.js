@@ -46,6 +46,27 @@ export default describe('JsonCLient', () => {
         expect(err).to.be.an('error');
       });
     });
+
+    it('should return empty if response has a 204 status', () => {
+      let email = 'b.b@bb.ca';
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        status: 204
+      });
+      return jsonClient.initializeSharedBox(email).then(result => {
+        expect(result).to.be.an('object').that.is.empty;
+      }, () => {
+        assert(false);
+      });
+
+    });
+
+
   });
 
 
