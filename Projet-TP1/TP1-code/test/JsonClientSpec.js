@@ -66,6 +66,33 @@ export default describe('JsonCLient', () => {
 
     });
 
+    it('should throw error if response ok is false', () => {
+      let email = 'b.b@bb.ca';
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        ok: false,
+        status: 100,
+        text: () => {
+          return new Promise((resolve) => {
+            resolve({});
+          });
+        },
+        statustext: () => {
+          return 'it is a hundred';
+        }
+      });
+      return jsonClient.initializeSharedBox(email).then(() => {
+        assert(false);
+      }, result => {
+        expect(result).to.be.an('error');
+      });
+
+    });
 
   });
 
