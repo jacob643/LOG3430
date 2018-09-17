@@ -94,6 +94,34 @@ export default describe('JsonCLient', () => {
 
     });
 
+    it('should return a response if everything is fine', () => {
+      let email = 'b.b@bb.ca';
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        ok: true,
+        status: 100,
+        text: () => {
+          return new Promise((resolve) => {
+            resolve({});
+          });
+        },
+        json: () => {
+          return 'the answer is 42';
+        }
+      });
+      return jsonClient.initializeSharedBox(email).then(result => {
+        expect(result).to.equal('the answer is 42');
+      }, () => {
+        assert(false);
+      });
+
+    });
+
   });
 
 
