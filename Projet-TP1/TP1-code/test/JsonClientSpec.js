@@ -16,6 +16,10 @@ export default describe('JsonCLient', () => {
     stubFetch = sinon.stub(Utils, 'fetch').withArgs(sinon.match.string, sinon.match.object);
   });
 
+  afterEach(() => {
+    sinon.restore();
+  });
+
   describe('initializeSharedBox', () => {
     it('should create a base JsonClient', () => {
       let email = 'b.b@bb.ca';
@@ -29,5 +33,21 @@ export default describe('JsonCLient', () => {
         expect(err).to.be.an('error');
       });
     });
+
+    it('should throw error if empty text', () => {
+      let email = 'b.b@bb.ca';
+      stubFetch.resolves({
+        ok: true,
+        text: ''
+      });
+      return jsonClient.initializeSharedBox(email).then(() => {
+        assert(false);
+      }, err => {
+        expect(err).to.be.an('error');
+      });
+    });
   });
+
+
+
 });
