@@ -140,6 +140,35 @@ export default describe('JsonCLient', () => {
       });
     });
 
+    //here, we won't go through the details of every exception trew situation
+    //because it would be from the same _makeRequest method.
+    //the method maybe should handle error properly.
+    it('should return a response if everything is fine', () => {
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        ok: true,
+        status: 100,
+        text: () => {
+          return new Promise((resolve) => {
+            resolve({});
+          });
+        },
+        json: () => {
+          return 'the answer is 42';
+        }
+      });
+      return jsonClient.submitSharedBox('the answer is 42').then(result => {
+        expect(result).to.equal('the answer is 42');
+      }, () => {
+        assert(false);
+      });
+
+    });
   });
 
 
