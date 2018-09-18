@@ -128,6 +128,7 @@ export default describe('JsonCLient', () => {
 
 
 
+    //the method maybe should handle error with a catch.
     it('should throw an error if the request threw one', () => {
       stubFetch.resolves({
         ok: false,
@@ -142,7 +143,6 @@ export default describe('JsonCLient', () => {
 
     //here, we won't go through the details of every exception trew situation
     //because it would be from the same _makeRequest method.
-    //the method maybe should handle error properly.
     it('should return a response if everything is fine', () => {
       stubFetch.onCall(0).resolves({
         ok: true,
