@@ -76,28 +76,6 @@ export default describe('JsonCLient', () => {
   describe('submitSharedBox', () => {
 
     it('should throw error if GUID is null or undefined', () => {
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: true,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        json: () => {
-          return {
-            guid: null,
-            uploadUrl: 'the uploadUrl'
-          };
-        }
-      });
-
       try {
         client.submitSharedBox({
           guid: null
