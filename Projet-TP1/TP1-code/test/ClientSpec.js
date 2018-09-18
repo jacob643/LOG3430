@@ -21,8 +21,7 @@ export default describe('JsonCLient', () => {
   describe('initializesharedbox', () => {
 
     it('should throw error if initializesharedbox threw one', () => {
-      assert(true);
-      expect(true).to.be.true;
+
 
       stubFetch.resolves({
         ok: false,
@@ -35,6 +34,41 @@ export default describe('JsonCLient', () => {
       }, err => {
         expect(err).to.be.an('error');
       });
+
+    });
+
+    it('should return the sharedbox with 2 more properties if ok', () => {
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        ok: true,
+        status: 100,
+        text: () => {
+          return new Promise((resolve) => {
+            resolve({});
+          });
+        },
+        json: () => {
+          return {
+            guid: 'the guid',
+            uploadUrl: 'the uploadUrl'
+          };
+        }
+      });
+
+      return client.initializeSharedBox({
+        userEmail: 'bb@b.ba'
+      }).then(res => {
+        expect(res.guid).to.equals('the guid');
+        expect(res.uploadUrl).to.equals('the uploadUrl');
+      }, () => {
+        assert(false);
+      });
+
 
     });
 
