@@ -94,5 +94,22 @@ export default describe('JsonCLient', () => {
     });
   });
 
+  it('should throw error if jsonclient did', () => {
+
+    stubFetch.resolves({
+      ok: false,
+      text: ''
+    });
+    return client.submitSharedBox({
+      guid: 'not null'
+    }).then(() => {
+      assert(false);
+    }, result => {
+      expect(result).to.be.an('error');
+    });
+
+
+
+  });
 
 });
