@@ -124,6 +124,23 @@ export default describe('JsonCLient', () => {
 
   });
 
+  describe('submitSharedBox', () => {
+
+
+
+    it('should throw an error if the request threw one', () => {
+      stubFetch.resolves({
+        ok: false,
+        text: ''
+      });
+      return jsonClient.submitSharedBox('the answer is 42').then(() => {
+        assert(false);
+      }, result => {
+        expect(result).to.be.an('error');
+      });
+    });
+
+  });
 
 
 });
