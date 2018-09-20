@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{titlepage}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{image/}}
+
+
+\title{Tests unitaires}
+\subtitle{TP1}
+\dateremise{le 2 Octobre 2018}
+\author{Billy Bouchard}{Jacob Dorais}{}
+\prof{Hiba Bagane}
+
+
+\begin{document}
+\maketitle
+\section*{Question}
+\subsection*{Quelle méthode avez vous choisi pour empêcher la classe JsonClient d’exécuter
+  les vrais appels API durant vos tests unitaires?}
+Nous avons choisis d'utiliser un stub de la method fetch de l'objet nodeFetch.
+Il s'agit d'une modification de la méthode qui remplace la définition utilisée dans le code de base.
+Un stub permet donc de remplacer complètement l'implementation de la méthode fetch de l'objet nodeFetch.
+On peux alors choisir de renvoyer les réponse que l'on veux
+
+\end{document}
