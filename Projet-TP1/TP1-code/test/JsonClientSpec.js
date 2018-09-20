@@ -197,4 +197,8 @@ export default describe('JsonCLient', () => {
 
   });
 
+  describe('closeSharedbox', () => {
+
+  });
+
 });

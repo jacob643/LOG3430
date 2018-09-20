@@ -291,17 +291,39 @@ export default describe('Client', () => {
       expect(spy.threw()).to.be.true;
     });
 
-    it('should call the jsonclient method if all good', () => {
+    it('should call the jsonclient method if all good: positive response', () => {
       let stub = sinon.stub(client.jsonClient, 'closeSharedbox')
         .withArgs(sinon.match.string);
-      stub.resolves('called');
+      stub.resolves({
+        'result': true,
+        'message': 'Sharedbox successfully closed.'
+      });
 
       return client.closeSharedbox(sharedbox).then(result => {
-        expect(result).to.equals('called');
+        expect(result.result).to.be.true;
+        expect(result.message).to.equals('Sharedbox successfully closed.');
       }, () => {
         assert(false);
       });
     });
+
+    it('should call the jsonclient method if all good: negative response', () => {
+      let stub = sinon.stub(client.jsonClient, 'closeSharedbox')
+        .withArgs(sinon.match.string);
+      stub.resolves(Promise.reject({
+        'result': false,
+        'message': 'Unable to close the Sharedbox.'
+      }));
+
+      return client.closeSharedbox(sharedbox).then(() => {
+        assert(false);
+      }, result => {
+        expect(result.result).not.to.be.true;
+        expect(result.message).to.equals('Unable to close the Sharedbox.');
+      });
+    });
+
+
 
   });
 
