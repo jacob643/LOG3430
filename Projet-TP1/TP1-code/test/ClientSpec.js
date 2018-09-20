@@ -277,8 +277,17 @@ export default describe('Client', () => {
 
     });
 
-
+  });
+  describe('addRecipient', () => {
+    it('should throw error if the guid is null or undef', () => {
+      sharedbox.guid = null;
+      let spy = sinon.spy(client, 'closeSharedbox');
+      try{client.closeSharedbox(sharedbox);}
+      catch(error){
+        expect(error.message).to.equals('SharedBox GUID cannot be null or undefined');
+      }
+      expect(spy.threw()).to.be.true;
+    });
 
   });
-
 });
