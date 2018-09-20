@@ -171,5 +171,30 @@ export default describe('JsonCLient', () => {
     });
   });
 
+  describe('addRecipient', () => {
+
+    it('add a recipient through a request', () => {
+      let stub = sinon.stub(jsonClient, '_makeRequest')
+        .withArgs(sinon.match.string, sinon.match.object);
+
+      stub.resolves('made the request');
+
+
+      return jsonClient.addRecipient('guid', 'recipientJson').then(result => {
+        expect(result).to.equals('made the request');
+        expect(stub.calledWith('api/sharedboxes/guid/recipients', {
+          headers: {
+            'Authorization-Token': jsonClient.apiToken,
+            'Content-Type': 'application/json'
+          },
+          method: 'post',
+          body: 'recipientJson'
+        })).to.be.true;
+      }, result => {
+        expect(result).not.to.be.an('error');
+      });
+    });
+
+  });
 
 });
