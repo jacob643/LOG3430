@@ -198,7 +198,30 @@ export default describe('JsonCLient', () => {
   });
 
   describe('closeSharedbox', () => {
+    it('should make a request with expected parameters', () => {
 
+      let stub = sinon.stub(jsonClient, '_makeRequest')
+        .withArgs(sinon.match.string, sinon.match.object);
+
+      stub.resolves('called');
+      let suffix = 'api/sharedboxes/101/close';
+      jsonClient.closeSharedbox('101').then(result => {
+        expect(result).to.equals('called');
+      }, () => {
+        assert(false);
+      });
+
+
+      expect(stub.calledWith(suffix, {
+        headers: {
+          'Authorization-Token': jsonClient.apiToken,
+          'Content-Type': 'application/json'
+        },
+        method: 'patch'
+      })).to.be.true;
+
+
+    });
   });
 
 });
