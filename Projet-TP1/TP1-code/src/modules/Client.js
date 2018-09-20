@@ -49,11 +49,11 @@ export default class Client {
     if (!sharedbox.guid) {
       throw new SharedBoxException(1, 'SharedBox GUID cannot be null or undefined');
     }
-    //let sb = sharedbox.toObject();
-    return this.jsonClient.submitSharedBox(sharedbox) //.toJson()
+    let sb = sharedbox.toObject();
+    return this.jsonClient.submitSharedBox(sharedbox.toJson())
       .then(result => {
         result.securityOptions = _pick(result, SECURITY_OPTIONS_KEYS);
-        return new Helpers.Sharedbox(Object.assign(sharedbox, result));
+        return new Helpers.Sharedbox(Object.assign(sb, result));
       })
       .catch(error => {
         throw error;
