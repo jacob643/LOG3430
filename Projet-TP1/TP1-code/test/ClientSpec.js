@@ -4,7 +4,7 @@ let assert = require('chai').assert;
 let expect = require('chai').expect;
 let sinon = require('sinon');
 
-export default describe('JsonCLient', () => {
+export default describe('CLient', () => {
   let client;
   let stubFetch;
   beforeEach(() => {
@@ -92,23 +92,63 @@ export default describe('JsonCLient', () => {
 
 
     });
-  });
 
-  it('should throw error if jsonclient did', () => {
+    it('should throw error if jsonclient did', () => {
 
-    stubFetch.resolves({
-      ok: false,
-      text: ''
+      stubFetch.resolves({
+        ok: false,
+        text: ''
+      });
+      return client.submitSharedBox({
+        guid: 'not null',
+        JsonClient: 'jsonclient',
+        Client: 'theclient',
+        Helpers: 'helper'
+      }).then(() => {
+        assert(false);
+      }, result => {
+        expect(result).to.be.an('error');
+      });
+
     });
-    return client.submitSharedBox({
-      guid: 'not null'
-    }).then(() => {
-      assert(false);
-    }, result => {
-      expect(result).to.be.an('error');
+
+    it('should return a helper if all good', () => {
+
+      stubFetch.onCall(0).resolves({
+        ok: true,
+        text: () => {
+          return 'text';
+        }
+      });
+      stubFetch.onCall(1).resolves({
+        ok: true,
+        status: 100,
+        text: () => {
+          return new Promise((resolve) => {
+            resolve({});
+          });
+        },
+        json: () => {
+          return {
+            guid: 'the guid',
+            uploadUrl: 'the uploadUrl',
+            JsonClient: 'jsonclient',
+            Client: 'theclient',
+            Helpers: 'helper'
+          };
+        }
+      });
+      return client.submitSharedBox({
+        guid: 'not null',
+      }).then(result => {
+        expect(result).to.be.an('Object').to.have.all.keys('expiration', 'guid',
+          'message', 'notificationLanguage', 'securityOptions', 'subject',
+          'uploadUrl', 'userEmail');
+      }, () => {
+        assert(false);
+      });
+
     });
-
-
 
   });
 

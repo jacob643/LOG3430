@@ -3,8 +3,12 @@ import Helpers from './Helpers/Helpers.js';
 import * as Utils from '../Utils/platform.js';
 import _map from 'lodash/map';
 import _pick from 'lodash/pick';
-import { SharedBoxException } from './SharedBoxException.js';
-import { SECURITY_OPTIONS_KEYS } from './Helpers/Sharedbox.js';
+import {
+  SharedBoxException
+} from './SharedBoxException.js';
+import {
+  SECURITY_OPTIONS_KEYS
+} from './Helpers/Sharedbox.js';
 
 export default class Client {
   constructor(apiToken, userId, endpoint, noCaching = false) {
@@ -45,11 +49,11 @@ export default class Client {
     if (!sharedbox.guid) {
       throw new SharedBoxException(1, 'SharedBox GUID cannot be null or undefined');
     }
-    let sb = sharedbox.toObject();
-    return this.jsonClient.submitSharedBox(sharedbox.toJson())
+    //let sb = sharedbox.toObject();
+    return this.jsonClient.submitSharedBox(sharedbox) //.toJson()
       .then(result => {
         result.securityOptions = _pick(result, SECURITY_OPTIONS_KEYS);
-        return new Helpers.Sharedbox(Object.assign(sb, result));
+        return new Helpers.Sharedbox(Object.assign(sharedbox, result));
       })
       .catch(error => {
         throw error;
