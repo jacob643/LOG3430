@@ -278,7 +278,9 @@ export default describe('Client', () => {
     });
 
   });
-  describe('addRecipient', () => {
+
+  describe('closeSharedbox', () => {
+
     it('should throw error if the guid is null or undef', () => {
       sharedbox.guid = null;
       let spy = sinon.spy(client, 'closeSharedbox');
@@ -289,5 +291,18 @@ export default describe('Client', () => {
       expect(spy.threw()).to.be.true;
     });
 
+    it('should call the jsonclient method if all good', () => {
+      let stub = sinon.stub(client.jsonClient, 'closeSharedbox')
+        .withArgs(sinon.match.string);
+      stub.resolves('called');
+
+      return client.closeSharedbox(sharedbox).then(result => {
+        expect(result).to.equals('called');
+      }, () => {
+        assert(false);
+      });
+    });
+
   });
+
 });
