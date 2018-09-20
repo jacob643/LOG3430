@@ -245,6 +245,20 @@ export default describe('Client', () => {
       expect(spy.threw()).to.be.true;
 
     });
+
+    it('should throw error if the email is null or undef', () => {
+      recipient.email = null;
+      let spy = sinon.spy(client, 'addRecipient');
+      try{client.addRecipient(sharedbox, recipient);}
+      catch(error){
+        expect(error.message).to.equals('Recipient email cannot be null or undefined');
+      }
+      expect(spy.threw()).to.be.true;
+
+    });
+
+
+
   });
 
 });
