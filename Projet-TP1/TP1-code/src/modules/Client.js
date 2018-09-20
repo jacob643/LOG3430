@@ -3,12 +3,8 @@ import Helpers from './Helpers/Helpers.js';
 import * as Utils from '../Utils/platform.js';
 import _map from 'lodash/map';
 import _pick from 'lodash/pick';
-import {
-  SharedBoxException
-} from './SharedBoxException.js';
-import {
-  SECURITY_OPTIONS_KEYS
-} from './Helpers/Sharedbox.js';
+import { SharedBoxException } from './SharedBoxException.js';
+import { SECURITY_OPTIONS_KEYS } from './Helpers/Sharedbox.js';
 
 export default class Client {
   constructor(apiToken, userId, endpoint, noCaching = false) {
@@ -97,9 +93,9 @@ export default class Client {
     if (!recipient.email) {
       throw new SharedBoxException(1, 'Recipient email cannot be null or undefined');
     }
-    return this.jsonClient.addRecipient(sharedbox.guid, recipient)//.toJson()
+    return this.jsonClient.addRecipient(sharedbox.guid, recipient.toJson())
       .then(res => {
-        recipient = new Helpers.Recipient(Object.assign(recipient, res));//.toObject()
+        recipient = new Helpers.Recipient(Object.assign(recipient.toObject(), res));
         sharedbox.recipients.push(recipient);
         return recipient;
       });
