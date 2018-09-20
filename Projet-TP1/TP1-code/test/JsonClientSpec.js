@@ -8,8 +8,21 @@ let sinon = require('sinon');
 export default describe('JsonCLient', () => {
   let jsonClient;
   let stubFetch;
-
-  //creer method qui initialize le stub avec la fake promise
+  let setStub = (call, ok, text, status, statustext, json) => {
+    stubFetch.onCall(call).resolves({
+      ok: ok,
+      text: () => {
+        return text;
+      },
+      statusText: () => {
+        return statustext;
+      },
+      status: status,
+      json: () => {
+        return json;
+      }
+    });
+  };
 
   beforeEach(() => {
     jsonClient = new SharedBox.JsonClient('api', 1, 'blah');
@@ -23,10 +36,7 @@ export default describe('JsonCLient', () => {
   describe('initializeSharedBox', () => {
     it('should create a base JsonClient', () => {
       let email = 'b.b@bb.ca';
-      stubFetch.resolves({
-        ok: false,
-        text: 'blah'
-      });
+      setStub(0, false, 'blah', 500, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(() => {
         assert(false);
       }, err => {
@@ -36,28 +46,18 @@ export default describe('JsonCLient', () => {
 
     it('should throw error if empty text', () => {
       let email = 'b.b@bb.ca';
-      stubFetch.resolves({
-        ok: true,
-        text: ''
-      });
+      setStub(0, true, '', 500, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(() => {
         assert(false);
       }, err => {
-        expect(err).to.be.an('error');
+        expect(err).to.be.equal('Unexpected server response format');
       });
     });
 
     it('should return empty if response has a 204 status', () => {
       let email = 'b.b@bb.ca';
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        status: 204
-      });
+      setStub(0, true, 'text', 200, 'bleh', 'went well');
+      setStub(1, true, 'text', 204, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(result => {
         expect(result).to.be.an('object').that.is.empty;
       }, () => {
@@ -68,24 +68,10 @@ export default describe('JsonCLient', () => {
 
     it('should throw error if response ok is false', () => {
       let email = 'b.b@bb.ca';
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: false,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        statustext: () => {
-          return 'it is a hundred';
-        }
-      });
+      setStub(0, true, 'text', 204, 'bleh', 'went well');
+      setStub(1, false, new Promise((resolve) => {
+        resolve({});
+      }), 200, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(() => {
         assert(false);
       }, result => {
@@ -96,26 +82,12 @@ export default describe('JsonCLient', () => {
 
     it('should return a response if everything is fine', () => {
       let email = 'b.b@bb.ca';
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: true,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        json: () => {
-          return 'the answer is 42';
-        }
-      });
+      setStub(0, true, 'text', 204, 'bleh', 'went well');
+      setStub(1, true, new Promise((resolve) => {
+        resolve('went Well');
+      }), 200, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(result => {
-        expect(result).to.equal('the answer is 42');
+        expect(result).to.equal('went well');
       }, () => {
         assert(false);
       });
@@ -125,15 +97,9 @@ export default describe('JsonCLient', () => {
   });
 
   describe('submitSharedBox', () => {
-
-
-
     //the method maybe should handle error with a catch.
     it('should throw an error if the request threw one', () => {
-      stubFetch.resolves({
-        ok: false,
-        text: ''
-      });
+      setStub(0, false, 'text', 204, 'bleh', 'went well');
       return jsonClient.submitSharedBox('the answer is 42').then(() => {
         assert(false);
       }, result => {
@@ -144,30 +110,15 @@ export default describe('JsonCLient', () => {
     //here, we won't go through the details of every exception trew situation
     //because it would be from the same _makeRequest method.
     it('should return a response if everything is fine', () => {
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: true,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        json: () => {
-          return 'the answer is 42';
-        }
-      });
-      return jsonClient.submitSharedBox('the answer is 42').then(result => {
-        expect(result).to.equal('the answer is 42');
+      setStub(0, true, 'text', 204, 'bleh', 'went well');
+      setStub(1, true, new Promise((resolve) => {
+        resolve({});
+      }), 200, 'bleh', 'went well');
+      return jsonClient.submitSharedBox('went well').then(result => {
+        expect(result).to.equal('went well');
       }, () => {
         assert(false);
       });
-
     });
   });
 

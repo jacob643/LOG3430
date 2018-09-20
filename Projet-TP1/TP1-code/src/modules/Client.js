@@ -3,8 +3,12 @@ import Helpers from './Helpers/Helpers.js';
 import * as Utils from '../Utils/platform.js';
 import _map from 'lodash/map';
 import _pick from 'lodash/pick';
-import { SharedBoxException } from './SharedBoxException.js';
-import { SECURITY_OPTIONS_KEYS } from './Helpers/Sharedbox.js';
+import {
+  SharedBoxException
+} from './SharedBoxException.js';
+import {
+  SECURITY_OPTIONS_KEYS
+} from './Helpers/Sharedbox.js';
 
 export default class Client {
   constructor(apiToken, userId, endpoint, noCaching = false) {

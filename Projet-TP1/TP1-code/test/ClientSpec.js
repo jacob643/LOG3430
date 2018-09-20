@@ -1,6 +1,6 @@
 import SharedBox from '../src/sharedbox.js';
 import * as Utils from '../src/Utils/platform.js';
-import Helpers from '../src/modules/helpers/Helpers.js';
+import Helpers from '../src/modules/Helpers/Helpers.js';
 let assert = require('chai').assert;
 let expect = require('chai').expect;
 let sinon = require('sinon');
@@ -51,23 +51,22 @@ export default describe('Client', () => {
         locked: false,
         bouncedEmail: false,
         verified: false,
-        contactMethods: [
-          {
-            id: 1,
-            destination: '+55555555555',
-            destinationType: 'office_phone',
-            verified: false,
-            createdAt: '2018-09-01T16:26:07-04:00',
-            updatedAt: '2018-09-01T16:26:07-04:00'
-          },
-          {
-            id: 2,
-            destination: '+1111111111',
-            destinationType: 'cell_phone',
-            verified: true,
-            createdAt: '2018-09-01T16:26:07-04:00',
-            updatedAt: '2018-09-01T16:26:07-04:00'
-          }
+        contactMethods: [{
+          id: 1,
+          destination: '+55555555555',
+          destinationType: 'office_phone',
+          verified: false,
+          createdAt: '2018-09-01T16:26:07-04:00',
+          updatedAt: '2018-09-01T16:26:07-04:00'
+        },
+        {
+          id: 2,
+          destination: '+1111111111',
+          destinationType: 'cell_phone',
+          verified: true,
+          createdAt: '2018-09-01T16:26:07-04:00',
+          updatedAt: '2018-09-01T16:26:07-04:00'
+        }
         ]
       }
     };
@@ -239,8 +238,9 @@ export default describe('Client', () => {
     it('should throw error if the guid is null or undef', () => {
       sharedbox.guid = null;
       let spy = sinon.spy(client, 'addRecipient');
-      try{client.addRecipient(sharedbox, recipient);}
-      catch(error){
+      try {
+        client.addRecipient(sharedbox, recipient);
+      } catch (error) {
         expect(error.message).to.equals('SharedBox GUID cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;
@@ -250,8 +250,9 @@ export default describe('Client', () => {
     it('should throw error if the email is null or undef', () => {
       recipient.email = null;
       let spy = sinon.spy(client, 'addRecipient');
-      try{client.addRecipient(sharedbox, recipient);}
-      catch(error){
+      try {
+        client.addRecipient(sharedbox, recipient);
+      } catch (error) {
         expect(error.message).to.equals('Recipient email cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;
@@ -264,7 +265,7 @@ export default describe('Client', () => {
 
 
       stub.resolves('response');
-      return client.addRecipient(sharedbox, recipient).then( result => {
+      return client.addRecipient(sharedbox, recipient).then(result => {
         recipient = new Helpers.Recipient(Object.assign(recipient, 'response'));
 
         expect(result.email).to.equals(recipient.email);
@@ -284,8 +285,9 @@ export default describe('Client', () => {
     it('should throw error if the guid is null or undef', () => {
       sharedbox.guid = null;
       let spy = sinon.spy(client, 'closeSharedbox');
-      try{client.closeSharedbox(sharedbox);}
-      catch(error){
+      try {
+        client.closeSharedbox(sharedbox);
+      } catch (error) {
         expect(error.message).to.equals('SharedBox GUID cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;

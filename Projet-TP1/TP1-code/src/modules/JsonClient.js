@@ -1,7 +1,9 @@
 import * as Utils from '../Utils/platform.js';
 import _any from 'lodash/some.js';
 import _all from 'lodash/every.js';
-import { SharedBoxException } from './SharedBoxException.js';
+import {
+  SharedBoxException
+} from './SharedBoxException.js';
 
 export default class JsonClient {
   constructor(apiToken, userId, endpoint, noCaching = false) {
@@ -13,7 +15,9 @@ export default class JsonClient {
 
   _getSharedBoxEndpoint(endpoint) {
     const url = `${endpoint}/services/sharedbox/server/url`;
-    return Utils.fetch(url, { method: 'get' }).then(response => {
+    return Utils.fetch(url, {
+      method: 'get'
+    }).then(response => {
       if (response.ok) {
         let text = response.text();
         if (text === '') {
@@ -27,13 +31,18 @@ export default class JsonClient {
   }
 
   _makeRequest(suffixUrl,
-    request = { headers: { 'Authorization-Token': this.apiToken}, method: 'get' }) {
+    request = {
+      headers: {
+        'Authorization-Token': this.apiToken
+      },
+      method: 'get'
+    }) {
     return this._getSharedBoxEndpoint(this.endpoint)
       .then(endpoint => {
         var url = `${endpoint}${suffixUrl}`;
         if (this.noCaching) {
           url += (suffixUrl.indexOf('?') >= 0 ? '&rand=' : '?rand=') +
-          new Date().getTime();
+            new Date().getTime();
         }
         return Utils.fetch(url, request);
       })
@@ -60,7 +69,10 @@ export default class JsonClient {
     var data = new Utils.formData();
     data.append('file', fileStream, filename);
 
-    return Utils.fetch(uploadUrl, { method: 'post', body: data }).then(response => {
+    return Utils.fetch(uploadUrl, {
+      method: 'post',
+      body: data
+    }).then(response => {
       if (response.ok) {
         return response.json();
       } else {
