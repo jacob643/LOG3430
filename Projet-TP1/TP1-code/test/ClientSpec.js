@@ -1,5 +1,6 @@
 import SharedBox from '../src/sharedbox.js';
 import * as Utils from '../src/Utils/platform.js';
+import Helpers from '../src/modules/helpers/Helpers.js';
 let assert = require('chai').assert;
 let expect = require('chai').expect;
 let sinon = require('sinon');
@@ -254,6 +255,25 @@ export default describe('Client', () => {
         expect(error.message).to.equals('Recipient email cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;
+
+    });
+
+    it('should return the new recipient if all good', () => {
+      let stub = sinon.stub(client.jsonClient, 'addRecipient')
+        .withArgs(sinon.match.string, sinon.match.object);
+
+
+      stub.resolves('response');
+      return client.addRecipient(sharedbox, recipient).then( result => {
+        recipient = new Helpers.Recipient(Object.assign(recipient, 'response'));
+
+        expect(result.email).to.equals(recipient.email);
+        expect(result.firstName).to.equals(recipient.firstName);
+        expect(result.lastName).to.equals(recipient.lastName);
+      }, () => {
+        assert(false);
+      });
+
 
     });
 

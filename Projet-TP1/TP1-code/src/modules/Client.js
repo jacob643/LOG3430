@@ -97,9 +97,9 @@ export default class Client {
     if (!recipient.email) {
       throw new SharedBoxException(1, 'Recipient email cannot be null or undefined');
     }
-    return this.jsonClient.addRecipient(sharedbox.guid, recipient.toJson())
+    return this.jsonClient.addRecipient(sharedbox.guid, recipient)//.toJson()
       .then(res => {
-        recipient = new Helpers.Recipient(Object.assign(recipient.toObject(), res));
+        recipient = new Helpers.Recipient(Object.assign(recipient, res));//.toObject()
         sharedbox.recipients.push(recipient);
         return recipient;
       });
