@@ -25,14 +25,23 @@
 Malgré que ces 3 éléments permettent de créer de fausses fonctions et de faux objets lors des différents test, il devient très rapidement difficile d'identifier lesquels servent dans quelles cas.
 En effet, ces trois objets ont différent but dans les test et il est important de connaitre leur role.
 Le spy permet d'observer le comportement d'une fonction,
-Le stub permet d'en empecher l'execution et le mock permet de modifier un objet complet
+Le stub permet d'en empecher l'execution et le mock permet même de plannifier d'avance les appels voulu.
 \subsection*{Spy}
 Le spy permet d'observer le comportement d'une méthode sans en modifier l'exécution.
 Cela peut rapidement devenir utile lorsqu'on veux connaitre les arguments de la fonction utiliser ou encore tout simplement savoir combien de fois cette dernière a été appelé.
-Malgré qu'il ne faut pas utiliser de spy lorsqu'on a l'intention de vouloir modifier le fonctionnement d'une méthode ou d'une fonction.
+Malgré qu'il ne faut pas utiliser de spy lorsqu'on a l'intention de vouloir modifier le fonctionnement d'une méthode ou d'une fonction, on peut quand même observer tout les appels qui lui ont été faites.
+Il s'agit donc ici d'un "wrapper" qui enregistre tout les entrée et sortie de la fonction ainsi que les appels, mais qui ne change pas son comportement.
 \subsection*{Stub}
-Le stub permet de faire la même chose que le spy, mais en plus il empêche l'execution de la méthode
-
+Le stub permet de faire la même chose que le spy, mais en plus il empêche l'execution de la méthode.
+En fait, il permet plutot de remplacer l'implementation de base de la méthode par une plus simple qui fera exactement ce que l'on veut.
+Les stub sont donc des spy qui au lieu de "wrapper", remplace simplement la fonction(ou methode) par une autre implémentation.
+\subsection*{Mock}
+Le Mock est le plus complet des modificateur utilisé pour les test unitaires.
+Ce dernier permet non seulement d'observer le comportement d'une méthode, mais aussi de lui donné le comportement désiré de l'appelant envers elle.
+Il devient donc possible de modifier le retour du mock en fonction des arguments qui lui sont passer.
+Contrairement au spy, le test echouera automatiquement si les parametres attendu ne sont pas respecté lors des appels.
+Le Mock est donc un stub dans lequels on ajoutes des attentes notamment quant au nombre d'appel et aux arguments avec lesquels les appels sont fait.
+Ainsi, le Mock est très utile lorsqu'on veut controller comment la méthode tester utilise notre mock.
 \section*{Question}
 \subsection*{Quelle méthode avez vous choisi pour empêcher la classe JsonClient d’exécuter
   les vrais appels API durant vos tests unitaires?}
