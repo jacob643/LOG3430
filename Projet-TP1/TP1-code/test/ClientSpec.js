@@ -70,8 +70,8 @@ export default describe('Client', () => {
         ]
       }
     };
-    let sharedbox = new Helpers.SharedBox(sharedbox);
-    let recipient = new Helpers.Recipient(recipient);
+    sharedbox = new Helpers.Sharedbox(sharedbox);
+    recipient = new Helpers.Recipient(recipient);
   });
 
   afterEach(() => {

@@ -33,8 +33,8 @@ export default describe('JsonCLient', () => {
     sinon.restore();
   });
 
-  describe('initializeSharedBox', () => {
-    it('should create a base JsonClient', () => {
+  describe('_getSharedBoxEndpoint', () => {
+    it('should reject the promise', () => {
       let email = 'b.b@bb.ca';
       setStub(0, false, 'blah', 500, 'bleh', 'went well');
       return jsonClient.initializeSharedBox(email).then(() => {
@@ -53,7 +53,9 @@ export default describe('JsonCLient', () => {
         expect(err).to.be.equal('Unexpected server response format');
       });
     });
+  });
 
+  describe('_makeRequest', () => {
     it('should return empty if response has a 204 status', () => {
       let email = 'b.b@bb.ca';
       setStub(0, true, 'text', 200, 'bleh', 'went well');
@@ -63,7 +65,6 @@ export default describe('JsonCLient', () => {
       }, () => {
         assert(false);
       });
-
     });
 
     it('should throw error if response ok is false', () => {
@@ -77,9 +78,10 @@ export default describe('JsonCLient', () => {
       }, result => {
         expect(result).to.be.an('error');
       });
-
     });
+  });
 
+  describe('initializeSharedBox', () => {
     it('should return a response if everything is fine', () => {
       let email = 'b.b@bb.ca';
       setStub(0, true, 'text', 204, 'bleh', 'went well');
@@ -91,9 +93,7 @@ export default describe('JsonCLient', () => {
       }, () => {
         assert(false);
       });
-
     });
-
   });
 
   describe('submitSharedBox', () => {
@@ -123,14 +123,10 @@ export default describe('JsonCLient', () => {
   });
 
   describe('addRecipient', () => {
-
     it('add a recipient through a request', () => {
       let stub = sinon.stub(jsonClient, '_makeRequest')
         .withArgs(sinon.match.string, sinon.match.object);
-
       stub.resolves('made the request');
-
-
       return jsonClient.addRecipient('guid', 'recipientJson').then(result => {
         expect(result).to.equals('made the request');
         expect(stub.calledWith('api/sharedboxes/guid/recipients', {
@@ -145,15 +141,12 @@ export default describe('JsonCLient', () => {
         expect(result).not.to.be.an('error');
       });
     });
-
   });
 
   describe('closeSharedbox', () => {
     it('should make a request with expected parameters', () => {
-
       let stub = sinon.stub(jsonClient, '_makeRequest')
         .withArgs(sinon.match.string, sinon.match.object);
-
       stub.resolves('called');
       let suffix = 'api/sharedboxes/101/close';
       jsonClient.closeSharedbox('101').then(result => {
@@ -162,7 +155,6 @@ export default describe('JsonCLient', () => {
         assert(false);
       });
 
-
       expect(stub.calledWith(suffix, {
         headers: {
           'Authorization-Token': jsonClient.apiToken,
@@ -170,9 +162,6 @@ export default describe('JsonCLient', () => {
         },
         method: 'patch'
       })).to.be.true;
-
-
     });
   });
-
 });

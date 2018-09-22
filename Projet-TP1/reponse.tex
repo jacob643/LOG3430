@@ -35,6 +35,8 @@ Il s'agit donc ici d'un "wrapper" qui enregistre tout les entrée et sortie de l
 Le stub permet de faire la même chose que le spy, mais en plus il empêche l'execution de la méthode.
 En fait, il permet plutot de remplacer l'implementation de base de la méthode par une plus simple qui fera exactement ce que l'on veut.
 Les stub sont donc des spy qui au lieu de "wrapper", remplace simplement la fonction(ou methode) par une autre implémentation.
+Il sont extrêmement utile lorsque l'on veux éviter de tester une  méthode ou fonction dont l'implémentation cascade sur une dizaine de méthode.
+On peut donc juste forcer le résultat de la première fonction plutot que de trouver quelle valeur envoyer
 \subsection*{Mock}
 Le Mock est le plus complet des modificateur utilisé pour les test unitaires.
 Ce dernier permet non seulement d'observer le comportement d'une méthode, mais aussi de lui donné le comportement désiré de l'appelant envers elle.
@@ -57,4 +59,22 @@ Le tout nous permet d'obtenir des test encore plus précis sur certaines méthod
 \subsection*{Quelle méthode avez vous choisi pour empêcher la classe Client d’exécuter les
   vrais appels API contenus dans les méthodes de la classe JsonClient durant
   vos tests unitaires?}
+Pour la majorité des appels, nous avons fait la même chose que pour la classe JsonClient.
+Nous avons donc utiliser un Stub de certaine méthode de la classe JsonClient.
+La fonction stub changeais souvent en fonction des fonctions tester, par conséquent elle était souvent différente.
+Cependant, pour certaine des fonctions, il est devenu plus utile de faire des Spy sur ces dernières.
+En effet, puisqu'il peux y avoir plus qu'un appel de ses sous méthodes, il est devenu important d'observer le nombre de fois où elles ont été appelée et les arguemnts avec lesquels elle ont été appelé.
+Ainsi, on ne change pas le fonctionnement de la méthode mais on peux au moins savoir si elle a été appeler avec les bons arguments ou encore si elle a été appelé le bon nombre de fois.
+Un exemple d'utilisation que nous avons fait a été pour verififer si une des méthodes testé lancais une erreur.
+\subsection*{Est-ce que vos tests unitaires ont découvert une ou plusieurs défaillances? Si oui,
+  expliquez ce que vous avez trouvé?}
+Oui, ils ont trouver un total de 3 défaillances dans le code.
+les deux première défaillances sont lié au fait qu'une méthode n'a pas été implémentée pour l'objet sharedbox.
+En effet, la méthode toObject sur un objet shareBox n'existe pas.
+Ainsi, en essayant de l'appeler, le programme lance une erreur.
+\subsection*{Le projet implémente un type d’exceptions personnalisé SharedBoxException
+  qui étend le type standard Error. Lorsque vous avez testé les exceptions qui
+  peuvent être lancées par la classe Client, était-il possible de vérifier le type de
+  l’exception? Si non, expliquez pourquoi et proposez une solution.}
+
 \end{document}
