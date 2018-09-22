@@ -70,19 +70,16 @@ export default describe('Client', () => {
         ]
       }
     };
+    let sharedbox = new Helpers.SharedBox(sharedbox);
+    let recipient = new Helpers.Recipient(recipient);
   });
 
   afterEach(() => {
     sinon.restore();
   });
 
-
-
   describe('initializesharedbox', () => {
-
     it('should throw error if initializesharedbox threw one', () => {
-
-
       stubFetch.resolves({
         ok: false,
         text: ''
@@ -94,7 +91,6 @@ export default describe('Client', () => {
       }, err => {
         expect(err).to.be.an('error');
       });
-
     });
 
     it('should return the sharedbox with 2 more properties if ok', () => {
@@ -119,7 +115,6 @@ export default describe('Client', () => {
           };
         }
       });
-
       return client.initializeSharedBox({
         userEmail: 'bb@b.ba'
       }).then(res => {
@@ -128,13 +123,10 @@ export default describe('Client', () => {
       }, () => {
         assert(false);
       });
-
-
     });
   });
 
   describe('submitSharedBox', () => {
-
     it('should throw error if GUID is null or undefined', () => {
       sharedbox.guid = null;
       try {
@@ -148,12 +140,9 @@ export default describe('Client', () => {
         return;
       }
       assert(false);
-
-
     });
 
     it('should throw error if jsonclient did', () => {
-
       stubFetch.resolves({
         ok: false,
         text: ''
@@ -163,11 +152,9 @@ export default describe('Client', () => {
       }, result => {
         expect(result).to.be.an('error');
       });
-
     });
 
     it('should return a helper if all good', () => {
-
       stubFetch.onCall(0).resolves({
         ok: true,
         text: () => {
@@ -196,15 +183,13 @@ export default describe('Client', () => {
       }, () => {
         assert(false);
       });
-
     });
-
   });
 
   describe('uploadAttachment', () => {
-
     let attachment;
     let stubupload;
+
     beforeEach(() => {
       attachment = {
         stream: 'stream',
@@ -228,13 +213,10 @@ export default describe('Client', () => {
       }, result => {
         expect(result).not.to.be.an('error');
       });
-
     });
-
   });
 
   describe('addRecipient', () => {
-
     it('should throw error if the guid is null or undef', () => {
       sharedbox.guid = null;
       let spy = sinon.spy(client, 'addRecipient');
@@ -244,7 +226,6 @@ export default describe('Client', () => {
         expect(error.message).to.equals('SharedBox GUID cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;
-
     });
 
     it('should throw error if the email is null or undef', () => {
@@ -256,32 +237,24 @@ export default describe('Client', () => {
         expect(error.message).to.equals('Recipient email cannot be null or undefined');
       }
       expect(spy.threw()).to.be.true;
-
     });
 
     it('should return the new recipient if all good', () => {
       let stub = sinon.stub(client.jsonClient, 'addRecipient')
         .withArgs(sinon.match.string, sinon.match.object);
-
-
       stub.resolves('response');
       return client.addRecipient(sharedbox, recipient).then(result => {
         recipient = new Helpers.Recipient(Object.assign(recipient, 'response'));
-
         expect(result.email).to.equals(recipient.email);
         expect(result.firstName).to.equals(recipient.firstName);
         expect(result.lastName).to.equals(recipient.lastName);
       }, () => {
         assert(false);
       });
-
-
     });
-
   });
 
   describe('closeSharedbox', () => {
-
     it('should throw error if the guid is null or undef', () => {
       sharedbox.guid = null;
       let spy = sinon.spy(client, 'closeSharedbox');
@@ -316,7 +289,6 @@ export default describe('Client', () => {
         'result': false,
         'message': 'Unable to close the Sharedbox.'
       }));
-
       return client.closeSharedbox(sharedbox).then(() => {
         assert(false);
       }, result => {
@@ -324,9 +296,5 @@ export default describe('Client', () => {
         expect(result.message).to.equals('Unable to close the Sharedbox.');
       });
     });
-
-
-
   });
-
 });
