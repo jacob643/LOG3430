@@ -1,18 +1,28 @@
 import SharedBox from '../src/sharedbox.js';
-import * as Utils from '../src/Utils/platform.js';
 import Helpers from '../src/modules/Helpers/Helpers.js';
+import {
+  SharedBoxException
+} from '../src/modules/SharedBoxException.js';
+
+
 let assert = require('chai').assert;
 let expect = require('chai').expect;
 let sinon = require('sinon');
 
 export default describe('Client', () => {
   let client;
-  let stubFetch;
+  let stub1;
+  let stub2;
   let sharedbox;
   let recipient;
+
   beforeEach(() => {
-    client = new SharedBox.Client('api', 1, 'blah');
-    stubFetch = sinon.stub(Utils, 'fetch').withArgs(sinon.match.string, sinon.match.object);
+    let api = 'api';
+    let userId = 1;
+    let endpoint = 'end';
+    client = new SharedBox.Client(api, userId, endpoint);
+    stub1 = sinon.stub(client.jsonClient, 'initializeSharedBox');
+    stub2 = sinon.stub(client.jsonClient, 'submitSharedBox');
     sharedbox = {
       userEmail: 'user@acme.com',
       guid: '1c820789a50747df8746aa5d71922a3f',
@@ -66,8 +76,7 @@ export default describe('Client', () => {
           verified: true,
           createdAt: '2018-09-01T16:26:07-04:00',
           updatedAt: '2018-09-01T16:26:07-04:00'
-        }
-        ]
+        }]
       }
     };
     sharedbox = new Helpers.Sharedbox(sharedbox);
@@ -80,10 +89,7 @@ export default describe('Client', () => {
 
   describe('initializesharedbox', () => {
     it('should throw error if initializesharedbox threw one', () => {
-      stubFetch.resolves({
-        ok: false,
-        text: ''
-      });
+      stub1.rejects(new Error('it went bad'));
       return client.initializeSharedBox({
         userEmail: 'bb@b.ba'
       }).then(() => {
@@ -94,26 +100,9 @@ export default describe('Client', () => {
     });
 
     it('should return the sharedbox with 2 more properties if ok', () => {
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: true,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        json: () => {
-          return {
-            guid: 'dc6f21e0f02c41123b795e4',
-            uploadUrl: 'upload_url'
-          };
-        }
+      stub1.resolves({
+        guid: 'dc6f21e0f02c41123b795e4',
+        uploadUrl: 'upload_url'
       });
       return client.initializeSharedBox({
         userEmail: 'bb@b.ba'
@@ -129,24 +118,13 @@ export default describe('Client', () => {
   describe('submitSharedBox', () => {
     it('should throw error if GUID is null or undefined', () => {
       sharedbox.guid = null;
-      try {
-        client.submitSharedBox(sharedbox).then(() => {
-          assert(false);
-        }, () => {
-          assert(false);
-        });
-      } catch (e) {
-        expect(e.message).to.equals('SharedBox GUID cannot be null or undefined');
-        return;
-      }
-      assert(false);
+      expect(() => {
+        client.submitSharedBox(sharedbox);
+      }).to.throw(SharedBoxException);
     });
 
     it('should throw error if jsonclient did', () => {
-      stubFetch.resolves({
-        ok: false,
-        text: ''
-      });
+      stub2.rejects(new Error);
       return client.submitSharedBox(sharedbox).then(() => {
         assert(false);
       }, result => {
@@ -155,26 +133,9 @@ export default describe('Client', () => {
     });
 
     it('should return a helper if all good', () => {
-      stubFetch.onCall(0).resolves({
-        ok: true,
-        text: () => {
-          return 'text';
-        }
-      });
-      stubFetch.onCall(1).resolves({
-        ok: true,
-        status: 100,
-        text: () => {
-          return new Promise((resolve) => {
-            resolve({});
-          });
-        },
-        json: () => {
-          return {
-            guid: 'dc6f21e0f02c41123b795e4',
-            uploadUrl: 'upload_url'
-          };
-        }
+      stub2.resolves({
+        guid: 'dc6f21e0f02c41123b795e4',
+        uploadUrl: 'upload_url'
       });
       return client.submitSharedBox(sharedbox).then(result => {
         expect(result).to.be.an('Object').to.have.all.keys('expiration', 'guid',
@@ -240,11 +201,10 @@ export default describe('Client', () => {
     });
 
     it('should return the new recipient if all good', () => {
-      let stub = sinon.stub(client.jsonClient, 'addRecipient')
-        .withArgs(sinon.match.string, sinon.match.object);
-      stub.resolves('response');
+      let stub3 = sinon.stub(client.jsonClient, 'addRecipient');
+      stub3.resolves('response');
       return client.addRecipient(sharedbox, recipient).then(result => {
-        recipient = new Helpers.Recipient(Object.assign(recipient, 'response'));
+        recipient = new Helpers.Recipient(Object.assign(recipient.toObject(), 'response'));
         expect(result.email).to.equals(recipient.email);
         expect(result.firstName).to.equals(recipient.firstName);
         expect(result.lastName).to.equals(recipient.lastName);
