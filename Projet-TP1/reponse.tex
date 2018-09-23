@@ -11,6 +11,13 @@
 	left=20mm
 }
 \renewcommand{\baselinestretch}{1.6}
+\usepackage{listings}
+\lstset{
+\xleftmargin=\parindent,
+frame=single,
+%basicstyle=\footnotesize
+}
+
 
 \title{Tests unitaires}
 \subtitle{TP1}
@@ -31,12 +38,31 @@ Le spy permet d'observer le comportement d'une méthode sans en modifier l'exéc
 Cela peut rapidement devenir utile lorsqu'on veux connaitre les arguments de la fonction utiliser ou encore tout simplement savoir combien de fois cette dernière a été appelé.
 Malgré qu'il ne faut pas utiliser de spy lorsqu'on a l'intention de vouloir modifier le fonctionnement d'une méthode ou d'une fonction, on peut quand même observer tout les appels qui lui ont été faites.
 Il s'agit donc ici d'un "wrapper" qui enregistre tout les entrée et sortie de la fonction ainsi que les appels, mais qui ne change pas son comportement.
+un spy est utilisable de cette façon:
+\begin{lstlisting}
+	var spy = sinon.spy(Object, 'methodName');
+	// pour verifier le spy a ete appeler avec le parametre arg
+	expect(spy.calledWith(arg)).to.be.true;
+	// pour simplement verifier s'il a été appelé
+	expect(spy.called()).to.be.true
+\end{lstlisting}
 \subsection*{Stub}
 Le stub permet de faire la même chose que le spy, mais en plus il empêche l'execution de la méthode.
 En fait, il permet plutot de remplacer l'implementation de base de la méthode par une plus simple qui fera exactement ce que l'on veut.
 Les stub sont donc des spy qui au lieu de "wrapper", remplace simplement la fonction(ou methode) par une autre implémentation.
 Il sont extrêmement utile lorsque l'on veux éviter de tester une  méthode ou fonction dont l'implémentation cascade sur une dizaine de méthode.
-On peut donc juste forcer le résultat de la première fonction plutot que de trouver quelle valeur envoyer
+On peut donc juste forcer le résultat de la première fonction plutot que de trouver quelle valeur envoyer.
+Il est important de noter que tout les methodes existantes dans un spy sont disponible dans un stub.
+La facon de creer un stub est la suivantes :
+\begin{lstlisting}
+	var stub = sinon.stub(Object, 'methodName');
+	// Pour l'utiliser avec des promesses
+	stub.resolves(/*Objet a retourner en cas de resolution*/);
+	// ou
+	stub.rejects(/*Objet (souvent erreures) a retourner en cas de reject*/)
+	// sinon il est possible de simplement choisir un retour
+	stub.returns(/*Objet a retourner en tout cas*/)
+\end{lstlisting}
 \subsection*{Mock}
 Le Mock est le plus complet des modificateur utilisé pour les test unitaires.
 Ce dernier permet non seulement d'observer le comportement d'une méthode, mais aussi de lui donné le comportement désiré de l'appelant envers elle.
@@ -76,5 +102,11 @@ Ainsi, en essayant de l'appeler, le programme lance une erreur.
   qui étend le type standard Error. Lorsque vous avez testé les exceptions qui
   peuvent être lancées par la classe Client, était-il possible de vérifier le type de
   l’exception? Si non, expliquez pourquoi et proposez une solution.}
-
+Oui, il était même tres facile de verifier le type!
+En effet, les librairies utilisées, sinon et chai, permettent facilement de verifier si les fonctions utilisée 'throw'.
+De plus, dans le cas des promesses, on peut facilement choisir de simuler un 'reject' de la prommesse.
+Toutes ces fonctions permettent de tester les erreurs.
+La fonction throw() de chai peut recevoir le type d'erreur en paramètre et donc il est possible de verifier s'il s'agit de la bonne exception.
+Ainsi, on peut s'assurer qu'il s'agissait bien d'une SharedBoxException qui a fait echouer la fonction.
+De plus, puisque nous avons utilisé un stub sur les fonctions de jsonClient,, il étais possible de forcer un certain type d'erreur et de voir si ce type suivait.
 \end{document}
