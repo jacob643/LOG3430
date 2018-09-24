@@ -5,7 +5,7 @@ let expect = require('chai').expect;
 export default describe('SharedBoxHelper', () => {
   let sharedbox;
 
-  describe('shared box initialization', () => {
+  describe('constructor', () => {
     it('should test every property of the object', () => {
       let sample = {
         userEmail: 'user@acme.com',
