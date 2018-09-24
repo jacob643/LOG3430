@@ -94,10 +94,15 @@ Ainsi, on ne change pas le fonctionnement de la méthode mais on peux au moins s
 Un exemple d'utilisation que nous avons fait a été pour verififer si une des méthodes testé lancais une erreur.
 \subsection*{Est-ce que vos tests unitaires ont découvert une ou plusieurs défaillances? Si oui,
   expliquez ce que vous avez trouvé?}
-Oui, ils ont trouver un total de 3 défaillances dans le code.
-les deux première défaillances sont lié au fait qu'une méthode n'a pas été implémentée pour l'objet sharedbox.
-En effet, la méthode toObject sur un objet shareBox n'existe pas.
-Ainsi, en essayant de l'appeler, le programme lance une erreur.
+Oui, ils ont trouvés un une défaillance dans 2 méthodes.
+Dans chacune des classes Sharedbox et Recipient, une méthode toJson est implémenté pour obtenir une chaîne de caractères de style JSON qui normalement nous permet de recréer l'objet en entier et retrouver tout ses attributs.
+Pour la tester, prenont Sharedbox comme exemple, nous avons donc, créer un objet Sharedbox, nous avons appelé la méthode toJson et se sont assuré que la valeur retourné est une chaîne de caractère.
+Ensuite, nous avons utilisé la fonction parse de Json qui sert de retransformer une chaîne de caractère Json en objet.
+Nous nous somme assuré que c'était bien un objet qui était retourné.
+Nous avons créé un autre Sharedbox à partir de cet objet et avons comparé chaque attribut du nouveau Sharedbox avec l'ancien.
+Après avoir comparé, certains attributs n'étaient pas définit dans la nouvelle sharedbox.
+Pour la sharedbox, userId, status, previewUrl, createdAt, updateAt, expiration, closedAt, attachments ainsi que les security options étaient manquant.
+Pour le récipient, l'Id et les options étaient manquant.
 \subsection*{Le projet implémente un type d’exceptions personnalisé SharedBoxException
   qui étend le type standard Error. Lorsque vous avez testé les exceptions qui
   peuvent être lancées par la classe Client, était-il possible de vérifier le type de
