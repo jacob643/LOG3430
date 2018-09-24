@@ -3,14 +3,11 @@ let expect = require('chai').expect;
 
 export default describe('Recipient', () => {
   let recipient;
+  let sample;
 
   beforeEach(() => {
     recipient = new SharedBox.Helpers.Recipient();
-  });
-
-  describe('constructor', () => {
-
-    let sample = {
+    sample = {
       id: '59adbccb-87cc-4224-bfd7-314dae796e48',
       firstName: 'John',
       lastName: 'Doe',
@@ -39,6 +36,10 @@ export default describe('Recipient', () => {
         ]
       }
     };
+  });
+
+  describe('constructor', () => {
+
     it('attributes should be values passed by parameters', () => {
       recipient = new SharedBox.Helpers.Recipient(sample);
       expect(recipient.id).to.equal(sample.id);
@@ -63,6 +64,18 @@ export default describe('Recipient', () => {
       expect(recipient.options.contactMethods[1].updateAt).to.equal(sample.options.contactMethods[1].updateAt);
 
 
+    });
+  });
+  describe('toJson', () => {
+    it('should return a JSON string of the object with proper parameters', () => {
+
+      recipient = new SharedBox.Helpers.Recipient(sample);
+      let json = recipient.toJson();
+      expect(json).to.be.a('string');
+      let obj = JSON.parse(json);
+      expect(obj.recipient.email).to.equals(sample.email);
+      expect(obj.recipient.firstName).to.equals(sample.firstName);
+      expect(obj.recipient.lastName).to.equals(sample.lastName);
     });
   });
 });
