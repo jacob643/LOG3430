@@ -23,36 +23,41 @@
 \section{Retour sur le TP 1}
 \subsection{Le language utilisé}
 Le travail pratique précédent a été fait en javascript sous le module nodejs.
-Il est très pertinent d'apprendre a utilisé les différentes librairies de test pour nodejs, car elles sont beaucoup plus souvent utilisée maintenant.
-De plus, le language web devient de plus en plus le language le plus utilisé en programmation.
-NodeJs permettait d'utilisé des librairies comme Sinon, Chai et Sinon-Chai qui sont simple d'utilisation et extrêmement puissantes pour faire plusieurs types différents d'objets.
-Avec une bonne lecture des librairies, il était facile de comprendre comment et a quoi ces différents objets servent.
-Le fait que le language soit faiblement typé simplifiait beaucoup les différentes opérations. On devait moins s'attarder sur les types mais plus sur les méthodes et les test.
+Il est très pertinent d'apprendre à utiliser les différentes librairies de test pour nodejs, car elles sont beaucoup plus souvent utilisées maintenant.
+De plus, le langage web devient de plus en plus le langage le plus utilisé en programmation.
+NodeJs permettait d'utiliser des librairies comme Sinon, Chai et Sinon-Chai qui sont simple d'utilisation et extrêmement puissante pour faire plusieurs types différents d'objets.
+Avec une bonne lecture des librairies, il était facile de comprendre comment et à quoi ces différents objets servent.
+Le fait que le langage soit faiblement typé simplifiait beaucoup les différentes opérations. On devait moins s'attarder sur les types, mais plus sur les méthodes et les tests.
 \subsection{Le code fourni}
 Le code fourni était définitivement trop complexe pour le but de l'apprentissage.
-En effet, le but du TP était d'apprendre les base des méthodes de test, notamment les objets utilisé lors des tests, mais aussi les différents type de test a effectuer en fonctions de différentes méthodes.
-La quantité de classes données, ainsi que leur contenu était beaucoup trop complexe pour que le seul but du lab soit d'apprendre les test.
-Malgré qu'aucun cours sur les promesses est été données, il fallait maintenant implémenter des test qui devait simuler (stub) certaines promesses.
-Les fonctions dans lesquels les test étaient effectuer appelais d'autre fonctions qui utilisait la même méthodes.
-Cette longue transistions rendais difficile de percevoir comment tester chacune de ces méthodes de la bonne facons.
-La grosseur de ces méthodes privées rendait aussi compliqué de comprendre les test à effectuer.
-On pouvait alors difficilement identifier tous les test qui devait être effectuer pour chacune des différentes méthodes car elles dépendait de plusieurs autres méthodes qui elles étaient privé et donc peu accessible.
-Il aurait été preférable d'avoir seulement une fonction privée a testé.
+En effet, le but du TP était d'apprendre les bases des méthodes de test, notamment les objets utilisés lors des tests, mais aussi les différents types de tests à effectuer en fonctions de différentes méthodes.
+La quantité de classes données, ainsi que leur contenu était beaucoup trop complexe pour que le seul but du lab soit d'apprendre les tests.
+Malgré qu'aucun cours sur les promesses n’a été données, il fallait maintenant implémenter des tests qui devait simuler (stub) certaines promesses.
+Les fonctions dans lesquels les tests étaient effectués appelaient d'autres fonctions qui utilisait la même méthode.
+Cette longue transition rendait difficile de percevoir comment tester chacune de ces méthodes de la bonne facons.
+La grosseur de ces méthodes privées rendait aussi compliqué de comprendre les tests à effectuer.
+On pouvait alors difficilement identifier tous les tests qui devait être effectué pour chacune des différentes méthodes, car elle dépendait de plusieurs autres méthodes qui elles étaient privées et donc peu accessible.
+Il aurait été préférable d'avoir seulement une fonction privée à tester.
+
 \subsection{L'information fourni}
-l'information qui était donnée au début du tp était peu suffisante afin d'en comprendre sa complexité.
-Il manquait beaucoup d'information pour expliquer comment le code fourni fonctionnait se qui a causer une grande perte de temps a comprendre le code fourni.
-Cependant, la tache était bien décrite et elle permettait très bien de connaitre les fonctions a tester.
-On pouvait facilement suivre notre progression dans les fonctions a tester et de s'assurer de notre compréhension
+L'information qui était donnée au début du TP était peu suffisante afin d'en comprendre sa complexité.
+Il manquait beaucoup d'information pour expliquer comment le code fourni fonctionnait ce qui a causé une grande perte de temps à comprendre le code fourni.
+Cependant, la tache était bien décrite et elle permettait très bien de connaitre les fonctions à tester.
+On pouvait facilement suivre notre progression dans les fonctions à tester et de s'assurer de notre compréhension
+
 \subsection{Le tp en général}
-Le niveau de difficulté du tp était bon mais peu être un peu trop long a réaliser.
-En effet, il aurait été beaucoup plus pertinent de tester les moins de paramètre d'initialisation (nous aurions appris la même chose qu'il y ait 15 propriété ou 3).
-Cependant, pour apprendre les différent type de stub, spy et mock, le tp a vraiment permis de comprendre les cas d'utilisation de chacun et de mieux comprendre leurs utilités
+Le niveau de difficulté du TP était bon, mais peut être un peu trop long à réaliser.
+En effet, il aurait été beaucoup plus pertinent de tester les moins de paramètre d'initialisation (nous aurions appris la même chose qu'il y ait 15 propriétés ou 3).
+Cependant, pour apprendre les différent type de stub, spy et mock, le TP a vraiment permis de comprendre les cas d'utilisation de chacun et de mieux comprendre leurs utilités
+
 \section{Expliquez comment vous avez obtenu vos cas de test pour la partie 4.1}
 \subsection{Graph Simple avec varible E et V}
-dans tous les cas de test, la varible V est le nombre de noeud que le graph doit posséder.
-Dans le cas de la fct \verb|simple(int V, int E)| la variable E stipule le nombre de lien entre chaque noeud $V_x$.
-Par conséquent, il est impossible d'avoir plus d'arrête que la somme de 0 jusqu'au nombre de noeud, car sinon on aurait plus que 1 arrête entre 2 noeud et le graph ne serait plus un graph simple.
-dans le tableau suivant on peu voir les différentes valeur que peut prendre les 2 variables:
+Dans tous les cas de test, la variable V est le nombre de noeuds que le graphe doit posséder.
+
+Dans le cas de la fct \verb|simple(int V, int E)| la variable E stipule le nombre de liens entre chaque noeud $V_x$.
+Par conséquent, il est impossible d'avoir plus d'arrête que la somme de 0 jusqu'au nombre de noeuds, car sinon on aurait plus que 1 arrête entre 2 noeuds et le graph ne serait plus un graph simple.
+dans le tableau suivant, on peut voir les différentes valeurs que peuvent prendre les 2 variables:
+
 \begin{tabular}{|l|l|l|l|l|}
  \hline
  \multicolumn{2}{|l|}{Choix} & propriétés                              \\ \hline
@@ -66,12 +71,12 @@ dans le tableau suivant on peu voir les différentes valeur que peut prendre les
 \end{tabular}
 
 \subsubsection{Each choice}
-Nous avons simplement fais 5 choix de test dans lesquels on test tout les e et tout les v de facon indépendante (en ne combinant rien pour tester les erreurs): V1, V2E1, V3E2, E3 et E4
+Nous avons simplement fais 5 choix de test dans lesquels nous testons tous les e et tout les v de facon indépendante (en ne combinant rien pour tester les erreurs): V1, V2E1, V3E2, E3 et E4
 \subsubsection{All choice}
-Pour le All Choice, nous avons ajouter tous les combinaisons possibles sauf dans les cas ou le V était une erreur (il devenait alors inutile de tester si e allait echouer ou reussir) pour un total de 9 test
+Pour le All Choice, nous avons ajouté toutes les combinaisons possibles sauf dans les cas ou le V est une erreur (il devenait alors inutile de tester si e allait échouer ou réussir) pour un total de 9 tests.
 \subsection{Graph simple avec e et p}
 Dans le cas de la fct \verb|simple(int V, double P)| la variable p stipule la probabilité d'un lien entre deux neouds $V_i$ et $V_j$.
-Par conséquent, lorsqu'il vaut 0, il est impossible d'avoir des liens entre les noeuds, lorsqu'elle vaut 1 il est sur et certain que le graph sera complet.
+Par conséquent, lorsqu'il vaut 0, il est impossible d'avoir des liens entre les noeuds, lorsqu'elle vaut 1 il est sûr et certain que le graphe sera complet.
 Voici un tableau des valeurs possible des variables:
 \begin{tabular}{|l|l|l|l|l|}
  \hline
@@ -86,12 +91,12 @@ Voici un tableau des valeurs possible des variables:
  $p_5$                       & p $>$ 0       & erreur   \\ \hline
 \end{tabular}
 \subsubsection{Each Choice}
-Pour le each choice, nous avons simplement tester les 4 cas d'erreures avec une valeur ok pour sa valeur combiner puis fais 2 test différents pour les les 4 autres valeurs ok a tester
+Pour le each choice, nous avons simplement testé les 4 cas d'erreurs avec une valeur ok pour sa valeur combiné, puis fais 2 test différents pour les les 4 autres valeurs ok à tester.
 \subsubsection{All Choice}
-De la même facon, nous avons tester toutes les combinaisons entre elles sauf pour le v1 que nous avons tester seul car il ferais echouer tout les autres test
+De la même facon, nous avons testé toutes les combinaisons entre elles sauf pour le v1 que nous avons testé seul car il ferais échouer tout les autres test.
 \subsection{Graph Biparti v1, v2, e}
-le graph biparti permet d'obtenir un graph qui contient 2 sous graph de v1 et v2 nombre de noeuds respectivement avec un total de e liens entre eux.
-Nous avons analyser le problem de la facon suivantes :
+le graph biparti permet d'obtenir un graphe qui contient 2 sous graphe de v1 et v2 nombre de noeuds respectivement avec un total de e liens entre eux.
+Nous avons analysé le problème de la facon suivantes :
 \begin{tabular}{|l|l|l|}
  \hline
  \multicolumn{2}{|l|}{Choix} & propriétés                            \\ \hline
@@ -106,12 +111,12 @@ Nous avons analyser le problem de la facon suivantes :
  $e_3$                       & e $>$ v1 $\times$ v2       & erreur   \\ \hline
 \end{tabular}
 \subsubsection{Each Choice}
-Pour le each choice, nous avons tester les erreurs avec des valeurs ok et tester tout les autres valeur en minimisant le nombre de test nécéssaires
+Pour le each choice, nous avons testé les erreurs avec des valeurs ok et testé tout les autres valeur en minimisant le nombre de test nécéssaires.
 \subsubsection{All Choice}
-pour le All choice, nous avons tester les erreurs avec des valeurs ok(pas 2 erreurs entres elles) et tester tout les autres valeurs en les combinant avec toutes les valeurs des autres variables possible
+Pour le All choice, nous avons testé de manière similaire aux autres méthodes, c'est-à-dire que nous avons testé toutes les combinaisons possible qui ne génèrent pas d'erreurs de manière individuelle.
 \subsection{Graph Biparti v1, v2, p}
-le graph biparti permet d'obtenir un graph qui contient 2 sous graph de v1 et v2 et une probabilité de p pour la possibilité d'avoiur un lien entre les différents noeuds.
-Nous avons analyser le problem de la facon suivantes :
+Le graphe biparti permet d'obtenir un graphe qui contient 2 sous graphes de v1 et v2 et une probabilité de p pour la possibilité d'avoir un lien entre les différents noeuds.
+Nous avons analysé le problème de la facon suivantes :
 \begin{tabular}{|l|l|l|}
  \hline
  \multicolumn{2}{|l|}{Choix} & propriétés                   \\ \hline
@@ -126,23 +131,24 @@ Nous avons analyser le problem de la facon suivantes :
  $p_3$                       & p $>$ 1           & erreur   \\ \hline
 \end{tabular}
 \subsection{Graph régulier}
-Pour le graph régulier, le paramètre v revenait. Cependant, le paramètre k s'ajoutait.
+Pour le graphe régulier, le paramètre v revenait. Cependant, le paramètre k s'ajoutait.
 Il s'agit du nombre d'arc par noeuds (donc le niveau du graph).
-Ce dernier ne peux pas etre plus grand que le nombre de noeud dans le cas d'un graph parafit.
+Ce dernier ne peux pas être plus grand que le nombre de noeud dans le cas d'un graphe simple.
 De plus, lorsque l'on multiplie le nombre de noeud avec le nombre d'arc, le total ne doit pas être impair. Voici les détails de notre analyse :
 \begin{tabular}{|l|l|l|l|l|}
  \hline
  \multicolumn{2}{|l|}{Choix} & propriétés                                \\ \hline
  $v_1$                       & v $<$ 0                        & erreur   \\ \hline
  $v_2$                       & v == 0                         & ok, vide \\ \hline
- $v_3$                       & v $>$ 0                        & ok       \\ \hline \hline
- $k_1$                       & k $<$ 0                        & ok       \\ \hline
- $k_2$                       & 0 $<$ k $<$ v-1                & ok       \\ \hline
- $k_3$                       & k $>$ v - 1                    & erreur   \\ \hline
- $k_4$                       & k == 0                         & erreur   \\ \hline
+ $v_3$                       & v $>$ 0                        & ok       \\ \hline 
+ $k_1$                       & k $<$ 0                        & erreur       \\ \hline
+ $k_2$                       & 0 $<$ k $<$ v-1                & erreur       \\ \hline \hline
+ $k_3$                       & k $>$ v - 1                    & ok   \\ \hline
+ $k_4$                       & k == 0                         & ok   \\ \hline
  $k_5$                       & (k $\times$ v) $modulo$ 2 == 1 & erreur   \\ \hline
 \end{tabular}
 \\
 Nous avons procédé de la même facon que les autres test afin de trouver les test all choice et each choice a partir du tableau suivant.
-
+Pour le cas de test où nous effectuons le choix k2, nous nous somme attendu à une erreur, mais la fonction n'en a pas généré : notre test échoue.
+Nous supposons que la fonction retourne un graphe qui n'est pas simple et donc autorise les multigraphe.
 \end{document}
