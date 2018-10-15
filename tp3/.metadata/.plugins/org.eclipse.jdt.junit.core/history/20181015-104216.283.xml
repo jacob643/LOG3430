@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TP3_MADUM" project="algs4-master" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="edu.princeton.cs.algs4.TP3_MADUM" time="0.097" displayname="TP3_MADUM" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]">
+    <testcase name="test" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.025" displayname="test()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:test()]"/>
+    <testcase name="Sequence1" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.029" displayname="Sequence1()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence1()]"/>
+    <testcase name="Sequence2" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.007" displayname="Sequence2()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence2()]"/>
+    <testcase name="Sequence3" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.02" displayname="Sequence3()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence3()]"/>
+    <testcase name="Sequence4" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.016" displayname="Sequence4()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence4()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,80 @@
+package edu.princeton.cs.algs4;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import edu.princeton.cs.algs4.Queue;
+
+class TP3_MADUM {
+	Queue<Integer> q;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		q = new Queue<Integer>();
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void test() {
+	}
+	
+	/**
+	 * Test for n attribute
+	 */
+	@Test
+	void Sequence1() {
+		// Queue() -> size() -> enqueue(2) -> size() -> dequeue() -> size()
+		assertEquals(q.size(), 0, "should initialize empty");
+		q.enqueue(2);
+		assertEquals(q.size(), 1, "should have incremented size of 1");
+		q.dequeue();
+		assertEquals(q.size(), 0, "should have decremented size to 0");
+	}
+	
+	@Test
+	void Sequence2() {
+		// Queue() -> size() -> dequeue() -> size() -> enqueue(2) -> size()  
+		assertEquals(q.size(), 0, "should initialize empty");
+		assertThrows(Exception.class, () -> {
+			q.dequeue();
+		} , "Should be impossible to dequeue if size is 0");
+		assertEquals(q.size(), 0, "should still be empty");
+		q.enqueue(2);
+		assertEquals(q.size(), 1, "should have incremented size of 1");
+	}
+	/**
+	 * Test for first attribute
+	 */
+	@Test
+	void Sequence3() {
+		// Queue() -> peek() -> enqueue(2) -> peek() -> dequeue() -> peek()
+		assertThrows(Exception.class, () -> {
+			q.peek();
+		}, "Should not be possible to peek() when empty");
+		q.enqueue(2);
+		int val = q.peek();
+		assertEquals(val, 2, "first should contain the value 2");
+		val = q.dequeue();
+		assertEquals(val, 2, "first dequeue have returned the value 2");
+		assertThrows(Exception.class, () -> {
+			q.peek();
+		}, "Should not be possible to peek when empty");
+	}
+	
+	@Test
+	void Sequence4() {
+		assertThrows(Exception.class, () -> {
+			q.peek();
+		}, "Should not be possible to peek() when empty");
+		assertThrows(Exception.class, () -> {
+			q.dequeue();
+		}, "should not be possible to dequeue while empty");
+	}
+	
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TP3_MADUM" project="algs4-master" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="edu.princeton.cs.algs4.TP3_MADUM" time="0.088" displayname="TP3_MADUM" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]">
+    <testcase name="testCoverage100" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.047" displayname="testCoverage100()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:testCoverage100()]"/>
+    <testcase name="Sequence1" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.001" displayname="Sequence1()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence1()]"/>
+    <testcase name="Sequence2" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.008" displayname="Sequence2()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence2()]"/>
+    <testcase name="Sequence3" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.013" displayname="Sequence3()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence3()]"/>
+    <testcase name="Sequence4" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.001" displayname="Sequence4()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence4()]"/>
+    <testcase name="Sequence5" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.001" displayname="Sequence5()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence5()]"/>
+    <testcase name="Sequence6" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.017" displayname="Sequence6()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:Sequence6()]"/>
+  </testsuite>
+</testrun>

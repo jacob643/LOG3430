@@ -1,0 +1,45 @@
+package edu.princeton.cs.algs4;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import edu.princeton.cs.algs4.Queue;
+
+class TP3_MADUM {
+	Queue<Integer> q;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		q = new Queue<Integer>();
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void test() {
+	}
+	
+	@Test
+	void Sequence1() {
+		assertTrue(q.size() == 0, "should initialize empty");
+		q.enqueue(2);
+		assertTrue(q.size() == 1, "should have incremented size of 1");
+		q.dequeue();
+		assertTrue(q.size() == 0, "should have decremented size to 0");
+		assertTrue(q.toString() == " ", "should print an empty string");
+	}
+	
+	@Test
+	void Sequence2() {
+		assertThrows(Exception.class, () -> {
+			q.dequeue();
+		} , "Should be impossible to dequeue");
+		assertTrue(q.size() == 0, "should still be empty");
+	}
+
+}

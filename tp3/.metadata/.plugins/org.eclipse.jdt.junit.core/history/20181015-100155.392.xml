@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TP3_MADUM" project="algs4-master" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="edu.princeton.cs.algs4.TP3_MADUM" time="0.044" displayname="TP3_MADUM" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]">
+    <testcase name="test" classname="edu.princeton.cs.algs4.TP3_MADUM" time="0.044" displayname="test()" uniqueid="[engine:junit-jupiter]/[class:edu.princeton.cs.algs4.TP3_MADUM]/[method:test()]"/>
+  </testsuite>
+</testrun>

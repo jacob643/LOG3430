@@ -1,0 +1,40 @@
+package edu.princeton.cs.algs4;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import edu.princeton.cs.algs4.Queue;
+
+class TP3_MADUM {
+	Queue<Integer> q;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		q = new Queue<Integer>();
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void test() {
+	}
+	
+	void Sequence1() {
+		assertTrue(q.size() == 0);
+		q.enqueue(2);
+		assertTrue(q.size() == 1);
+		q.dequeue();
+		assertTrue(q.size() == 0);
+		q.toString();
+	}
+	
+	void Sequence2() {
+		assertTrue(q.size() == 0);
+	}
+
+}
