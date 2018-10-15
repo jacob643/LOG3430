@@ -387,14 +387,109 @@ class Tp2q41 {
 		assertTrue(graphe.E() >= 0 && graphe.E() <= v*V);
 	}
 	
+	@Test
+	void testgrapheregularv1() {
+		// v < 0
+		assertThrows(Exception.class, () -> {
+			int v = -1;
+			int k = 0;
+			graphe = GraphGenerator.regular(v, k);
+		});
+	}
 	
+	@Test
+	void testgrapheregulark1() {
+		// k < 0
+		assertThrows(Exception.class, () -> {
+			int v = 1;
+			int k = -1;
+			graphe = GraphGenerator.regular(v, k);
+		});
+	}
 	
+	@Test
+	void testgrapheregulark2() {
+		// k > v-1
+		assertThrows(Exception.class, () -> {
+			int v = 2;
+			int k = 2;
+			graphe = GraphGenerator.regular(v, k);
+		});
+	}
 	
+	@Test
+	void testgrapheregularv2k3() {
+		// v == 0 et k == 0
+		int v = 0;
+		int k = 0;
+		graphe = GraphGenerator.regular(v, k);
+		assertEquals(graphe.V(), 0, "expect 0 vertices");
+		assertEquals(graphe.E(), 0, "expect 0 edges");
+
+	}
 	
+	@Test
+	void testgrapheregularv3k4() {
+		// 0 < v et 0 < k et (k*n)%2 == 0
+		int v = 4;
+		int k = 3;
+		graphe = GraphGenerator.regular(v, k);
+		assertEquals(graphe.V(), v, "expect " + v + "vertices");
+		assertEquals(graphe.E(), v*k/2, "expect " + v*k/2 + " edges");
+		for(int i = 0; i < graphe.V(); i++) {
+		assertEquals(graphe.degree(i), k, "expect all vertex to have " + k + " degree");
+		}
+	}
 	
+	@Test
+	void testgrapheregularv3k5() {
+		// 0 < v et 0 < k et (k*n)%2 == 1
+		assertThrows(Exception.class, () -> {
+			int v = 5;
+			int k = 3;
+			graphe = GraphGenerator.regular(v, k);
+		});
+	}
 	
+	@Test
+	void testgrapheregularv3k3() {
+		// v > 0 et k == 0
+		// necessaire pour AC
+		int v = 5;
+		int k = 0;
+		graphe = GraphGenerator.regular(v, k);
+		assertEquals(graphe.V(), v, "expect " + v + " vertices");
+		assertEquals(graphe.E(), 0, "expect 0 edges");
+
+	}
 	
+	@Test
+	void testgrapheregularv2k4() {
+		// 0 == v et 0 < k et (k*n)%2 == 0
+		// necessaire pour AC
+		int v = 0;
+		int k = 4;
+		graphe = GraphGenerator.regular(v, k);
+		assertEquals(graphe.V(), v, "expect " + v + "vertices");
+		assertEquals(graphe.E(), v*k/2, "expect " + v*k/2 + " edges");
+		for(int i = 0; i < graphe.V(); i++) {
+		assertEquals(graphe.degree(i), k, "expect all vertex to have " + k + " degree");
+		}
+	}
 	
+	@Test
+	void testgrapheregularv2k5() {
+		// v == 0 et 0 < k et (k*n)%2 == 1
+		// necessaire pour AC
+		int v = 0;
+		int k = 3;
+		graphe = GraphGenerator.regular(v, k);
+		assertEquals(graphe.V(), v, "expect " + v + "vertices");
+		assertEquals(graphe.E(), v*k/2, "expect " + v*k/2 + " edges");
+		for(int i = 0; i < graphe.V(); i++) {
+		assertEquals(graphe.degree(i), k, "expect all vertex to have " + k + " degree");
+		}
+	}
 	
 	
 	
