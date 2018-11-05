@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{forest}
+\forestset{qtree/.style={for tree={parent anchor=south, child anchor=north,align=center,inner sep=0pt}}}
+\usepackage{geometry}
+\geometry{
+	right=20mm,
+	left=20mm
+}
+\renewcommand{\baselinestretch}{1.6}
+\usepackage{tikz}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+\section{Diagramme des États}
+
+\begin{center}
+  \begin{tikzpicture}[r/.style={rectangle,draw=black, minimum size=5mm},
+      c/.style={circle,draw=black,fill=black, minimum size=5mm}]
+
+    \node[c] (c) at (-9, -3) {};
+
+    \node[r] (e) at (-8, 0) {
+      \begin{tabular}{l}
+        Empty        \\ \hline
+        first = null \\
+        last = null  \\
+        n = 0
+      \end{tabular}
+    };
+    \node[r] (p) at (-4, 0) {
+      \begin{tabular}{l}
+        One Node     \\ \hline
+        first = last \\
+        n = 1
+      \end{tabular}
+    };
+    \node[r] (f) at (0,0) {
+      \begin{tabular}{l}
+        Multi Node        \\ \hline
+        first $\neq$ last \\
+        n=0
+      \end{tabular}
+    };
+
+    \draw[->] (c.north) -- (e.south) node [midway, left] (text) {create};
+    \draw[->] (e.east) -- (p.west) node [midway, above, sloped] (text) {enqueue()};
+    \draw[->] (e) to [out=200, in=160, looseness=4] node [midway, left] (text) {dequeue()} (e);
+
+    \draw[->] (p.south) to [out=270,in=270] node [midway, below] (text) {dequeue()} (e.south) ;
+    \draw[->] (p.east) -- (f.west) node [midway, above, sloped] (text) {enqueue()};
+    \draw[->] (f.north) to [out=90,in=90] node [midway, above] (text) {dequeue() $[n=2]$ } (p.north);
+    \draw[->] (f) to [out=20, in=-20, looseness=4] node [midway, right] (text) {
+      \begin{tabular}{l}
+        enqueue(), \\
+        dequeue() $[ n > 2 ]$
+      \end{tabular}
+    } (f);
+  \end{tikzpicture}
+\end{center}
+
+\section{Diagramme des passage d'états}
+\begin{forest}
+  [Empty
+      [One Node, edge label={node[midway,left,font=\scriptsize]{enqueue()}}
+          [Multi Node,edge label={node[midway,left,font=\scriptsize]{enqueue()}}
+              [Multi Node,edge label={node[midway,left,font=\scriptsize]{\begin{tabular}{l}
+                          enqueue() \\
+                          dequeue() $[n>2]$
+                        \end{tabular}}} ]
+              [One Node,edge label={node[midway,right,font=\scriptsize]{dequeue() $[n=2]$}} ]
+          ]
+          [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
+      ]
+      [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
+  ]
+\end{forest}
+
+
+\end{document}
