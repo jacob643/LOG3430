@@ -13,8 +13,15 @@
 \usepackage[utf8]{inputenc}
 \begin{document}
 
-\section{Diagramme des États}
-
+\section{Choix des États}
+Nous avons décider de faire un un total de 3 états soit : un état vide, un état avec un seul élement,un element lorsque la file contient plus que 3 éléments.
+Le choix de ces états ces surtout basée sur les propriété de first et last de la file.
+En effet, dans le premier état, first et last ne sont pas défini et accédé a leur valeur retourne une erreur.
+Dans le second état, ils sont défini, mais on la même valeur.
+Dans le dernier état, ils sont différents(pointe vers 2 élément différents).
+Dans le diagramme des états ci-dessous, on peut voir toutes les transitions entre les états.
+Il est important de noter que seulement 2 méthodes peuvent modifier les états de la file soit enqueue et dequeue
+\subsection{Diagramme des États}
 \begin{center}
   \begin{tikzpicture}[r/.style={rectangle,draw=black, minimum size=5mm},
       c/.style={circle,draw=black,fill=black, minimum size=5mm}]
@@ -40,7 +47,7 @@
       \begin{tabular}{l}
         Multi Node        \\ \hline
         first $\neq$ last \\
-        n=0
+        n $>$ 1
       \end{tabular}
     };
 
