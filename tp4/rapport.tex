@@ -22,67 +22,86 @@ Dans le dernier état, ils sont différents(pointe vers 2 élément différents)
 Dans le diagramme des états ci-dessous, on peut voir toutes les transitions entre les états.
 Il est important de noter que seulement 2 méthodes peuvent modifier les états de la file soit enqueue et dequeue
 \subsection{Diagramme des États}
-\begin{center}
-  \begin{tikzpicture}[r/.style={rectangle,draw=black, minimum size=5mm},
-      c/.style={circle,draw=black,fill=black, minimum size=5mm}]
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[r/.style={rectangle,draw=black, minimum size=5mm},
+        c/.style={circle,draw=black,fill=black, minimum size=5mm}]
 
-    \node[c] (c) at (-9, -3) {};
+      \node[c] (c) at (-9, -3) {};
 
-    \node[r] (e) at (-8, 0) {
-      \begin{tabular}{l}
-        Empty        \\ \hline
-        first = null \\
-        last = null  \\
-        n = 0
-      \end{tabular}
-    };
-    \node[r] (p) at (-4, 0) {
-      \begin{tabular}{l}
-        One Node     \\ \hline
-        first = last \\
-        n = 1
-      \end{tabular}
-    };
-    \node[r] (f) at (0,0) {
-      \begin{tabular}{l}
-        Multi Node        \\ \hline
-        first $\neq$ last \\
-        n $>$ 1
-      \end{tabular}
-    };
+      \node[r] (e) at (-8, 0) {
+        \begin{tabular}{l}
+          Empty        \\ \hline
+          first = null \\
+          last = null  \\
+          n = 0
+        \end{tabular}
+      };
+      \node[r] (p) at (-4, 0) {
+        \begin{tabular}{l}
+          One Node     \\ \hline
+          first = last \\
+          n = 1
+        \end{tabular}
+      };
+      \node[r] (f) at (0,0) {
+        \begin{tabular}{l}
+          Multi Node        \\ \hline
+          first $\neq$ last \\
+          n $>$ 1
+        \end{tabular}
+      };
 
-    \draw[->] (c.north) -- (e.south) node [midway, left] (text) {create};
-    \draw[->] (e.east) -- (p.west) node [midway, above, sloped] (text) {enqueue()};
-    \draw[->] (e) to [out=200, in=160, looseness=4] node [midway, left] (text) {dequeue()} (e);
+      \draw[->] (c.north) -- (e.south) node [midway, left] (text) {create};
+      \draw[->] (e.east) -- (p.west) node [midway, above, sloped] (text) {enqueue()};
+      \draw[->] (e) to [out=200, in=160, looseness=4] node [midway, left] (text) {dequeue()} (e);
 
-    \draw[->] (p.south) to [out=270,in=270] node [midway, below] (text) {dequeue()} (e.south) ;
-    \draw[->] (p.east) -- (f.west) node [midway, above, sloped] (text) {enqueue()};
-    \draw[->] (f.north) to [out=90,in=90] node [midway, above] (text) {dequeue() $[n=2]$ } (p.north);
-    \draw[->] (f) to [out=20, in=-20, looseness=4] node [midway, right] (text) {
-      \begin{tabular}{l}
-        enqueue(), \\
-        dequeue() $[ n > 2 ]$
-      \end{tabular}
-    } (f);
-  \end{tikzpicture}
-\end{center}
+      \draw[->] (p.south) to [out=270,in=270] node [midway, below] (text) {dequeue()} (e.south) ;
+      \draw[->] (p.east) -- (f.west) node [midway, above, sloped] (text) {enqueue()};
+      \draw[->] (f.north) to [out=90,in=90] node [midway, above] (text) {dequeue() $[n=2]$ } (p.north);
+      \draw[->] (f) to [out=20, in=-20, looseness=4] node [midway, right] (text) {
+        \begin{tabular}{l}
+          enqueue(), \\
+          dequeue() $[ n > 2 ]$
+        \end{tabular}
+      } (f);
+    \end{tikzpicture}
+  \end{center}
+  \caption{Diagramme des états}
+\end{figure}
 
-\section{Diagramme des passage d'états}
-\begin{forest}
-  [Empty
-      [One Node, edge label={node[midway,left,font=\scriptsize]{enqueue()}}
-          [Multi Node,edge label={node[midway,left,font=\scriptsize]{enqueue()}}
-              [Multi Node,edge label={node[midway,left,font=\scriptsize]{\begin{tabular}{l}
-                          enqueue() \\
-                          dequeue() $[n>2]$
-                        \end{tabular}}} ]
-              [One Node,edge label={node[midway,right,font=\scriptsize]{dequeue() $[n=2]$}} ]
+\newpage
+\subsection{Diagramme des passage d'états}
+dans le schémas à la figure 2, on peut observer que l'arbre contient six branches finales en partant de son initialisation.
+\begin{figure}[!h]
+  \begin{center}
+    \begin{forest}
+      [create
+          [Empty
+              [One Node, edge label={node[midway,left,font=\scriptsize]{enqueue()}}
+                  [Multi Node,edge label={node[midway,left,font=\scriptsize]{enqueue()}}
+                      [Multi Node,edge label={node[midway,left,font=\scriptsize]{\begin{tabular}{l}
+                                  enqueue() \\
+                                  dequeue() $[n>2]$
+                                \end{tabular}}} ]
+                      [One Node,edge label={node[midway,right,font=\scriptsize]{dequeue() $[n=2]$}} ]
+                  ]
+                  [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
+              ]
+              [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
           ]
-          [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
       ]
-      [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
-  ]
-\end{forest}
-
+    \end{forest}
+  \end{center}
+  \caption{Passage des états}
+\end{figure}
+on obtient alors les 5 tests suivant :
+\begin{enumerate}
+  \item create$\rightarrow$[Empty].dequeue$\rightarrow$[Empty]
+  \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].dequeue$\rightarrow$[Empty]
+  \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].enqueue$\rightarrow$[Multi node].dequeue$\rightarrow$[One Node]
+  \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].enqueue$\rightarrow$[Multi node].enqueue$\rightarrow$[Multi Node]
+  \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].enqueue$\rightarrow$[Multi node].enqueue$\rightarrow$[Multi Node]$\rightarrow$[Multi Node].dequeue$\rightarrow$[Multi Node]
+\end{enumerate}
 
 \end{document}
