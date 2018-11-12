@@ -22,6 +22,11 @@
 \usepackage{float}
 \begin{document}
 \maketitle
+\section{Introduction}
+La méthode de tests basée sur les états est utile pour détecter s'il est possible pour un objet d'entrer dans un état aberrant.
+Au cours de ce travail pratique, nous allons élaborer des tests basés sur les états de la classe Queue.
+Cette classe est utilisé pour enregistrer des données et contient 2 pointeurs: first et last, et permet d'ajouter et d'enlever à la queue de manière FIFO.
+
 \section{Choix des États}
 Nous avons décidé de faire un total de 3 états soit : un état vide, un état avec un seul élément,un élément lorsque la file contient 2 éléments ou plus.
 Le choix de ces états ses surtout basée sur les propriétés de first et last de la file.
@@ -29,7 +34,7 @@ En effet, dans le premier état, first et last ne sont pas défini et accéder �
 Dans le second état, ils sont définis, mais ont la même valeur.
 Dans le dernier état, ils sont différents(pointe vers 2 éléments différents).
 Dans le diagramme des états ci-dessous, on peut voir toutes les transitions entre les états.
-Il est important de noter que seulement 2 méthodes peuvent modifier les états de la file soit enqueue et dequeue
+Il est important de noter que seulement 2 méthodes peuvent modifier les états de la file soit enqueue et dequeue.
 \subsection{Diagramme des États}
 \begin{figure}[h]
   \begin{center}
@@ -81,7 +86,7 @@ Il est important de noter que seulement 2 méthodes peuvent modifier les états 
 
 \newpage
 \subsection{Diagramme des passage d'états}
-dans le schéma à la figure 2, on peut observer que l'arbre contient cinq noeud finaux (feuilles) en partant de son initialisation.
+Dans le schéma à la figure 2, on peut observer que l'arbre contient cinq noeud finaux (feuilles) en partant de son initialisation.
 \begin{figure}[H]
   \begin{center}
     \begin{forest}
@@ -110,5 +115,9 @@ On obtient alors les 5 tests suivant :
   \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].enqueue$\rightarrow$[Multi node].enqueue$\rightarrow$[Multi Node]
   \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].enqueue$\rightarrow$[Multi node].enqueue$\rightarrow$[Multi Node]$\rightarrow$[Multi Node].dequeue$\rightarrow$[Multi Node]
 \end{enumerate}
-
+\section{Conclusion}
+Nous avons établis 5 cas de tests basés sur nos états, 1 cas de tests par feuille de notre arbre, ce qui englobe toutes nos états ainsi que toutes les manière de s'y rendre.
+Ce qui explique notre couverture de 100 pourcent en ce qui attrait aux méthodes utilisé dans les tests.(enqueue, dequeue)
+Le travail nous a permis de mettre en pratique la matière vu en cours théorique.
+Nous somme désormais en mesure d'écrire des tests basée sur les états.
 \end{document}
