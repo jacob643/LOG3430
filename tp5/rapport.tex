@@ -20,47 +20,42 @@
   \node[class] (linklistI) at (6,1) {LinkedListInterface};
   \node[class] (setcalc) at (3,2) {SetCalculator};
   \node[class] (setcalcI) at (6.5,2) {SetCalculatorInterface};
-  \node[class] (op) at (0,2) {Operator};
   \node[class] (main) at (0,1) {Main};
 
   \draw[->] (mylist.east) -- (mylistI.west) node[midway, above] {I};
   \draw[->] (setcalc.east) -- (setcalcI.west) node[midway, above] {I};
   \draw[->] (linklist.east) -- (linklistI.west) node[midway, above] {I};
   \draw[->] (linklist.north) -- (setcalc.south) node[midway, right] {Ag};
-  \draw[->] (linklist.south) -- (mylist.north) node[midway, right] {Ag};
-  \draw[->] (linklist.north) -- (op.east) node[midway, below] {As};
+  \draw[->] (linklistI.south) -| (mylistI.north) node[midway, below] {As};
+  \draw[->] (linklist.south) -- (mylist.north) node[midway, right] {As};
   \draw[->] (main.east) -- (mylist.west) node[midway, above] {I};
   \draw[->] (main.east) -- (linklist.west) node[midway, above] {I};
-  \draw[->] (main.north) -- (op.south) node[midway, right] {I};
 
 \end{tikzpicture}
 
 \section{CFW}
 \begin{tabular}{|l l|l|}
   \hline
-  \multicolumn{2}{|l|}{Classe X} & CFW(X)                                             \\ \hline
-  (A)                            & MyList                 & LinkedList, main          \\ \hline
-  (AI)                           & MyListInterface        & MyList, LinkedList, main  \\ \hline
-  (B)                            & SetCalculator          & LinkedList                \\ \hline
-  (BI)                           & SetCalculatorInterface & SetCalculator, LinkedList \\ \hline
-  (C)                            & LinkedList             & main                      \\ \hline
-  (CI)                           & LinkedListInterface    & LinkedList, main          \\ \hline
-  (D)                            & Operator               & LinkedList, main          \\ \hline
-  (E)                            & main                   &                           \\ \hline
+  \multicolumn{2}{|l|}{Classe X} & CFW(X)                                                                 \\ \hline
+  (A)                            & MyList                 & LinkedList, main                              \\ \hline
+  (AI)                           & MyListInterface        & MyList, LinkedList, main, LinkedListInterface \\ \hline
+  (B)                            & SetCalculator          & LinkedList, main                              \\ \hline
+  (BI)                           & SetCalculatorInterface & SetCalculator, LinkedList, main               \\ \hline
+  (C)                            & LinkedList             & main                                          \\ \hline
+  (CI)                           & LinkedListInterface    & LinkedList, main                              \\ \hline
+  (D)                            & main                   &                                               \\ \hline
 \end{tabular}
 
 \section{Ordre Topo}
 
 \begin{tikzpicture}[c/.style={circle,draw=black, minimum size=10mm}]
   %niv 1
-  \node[c] (CI) at (0,0) {CI};
   \node[c] (AI) at (1.5,0) {AI};
   \node[c] (BI) at (-1.5,0) {BI};
-  \node[c] (D) at (3, 0) {D};
   %niv 2
+  \node[c] (CI) at (0,-1.5) {CI};
   \node[c] (B) at (-1.5,-1.5) {B};
   \node[c] (A) at (1.5,-1.5) {A};
-  \node[minimum size = 10mm] (Dl) at (3, -1.5) {};
   %niv 3
   \node[c] (C) at (0,-3) {C};
   %niv 4
@@ -69,23 +64,22 @@
   %niv 1-2
   \draw[->] (CI.south) -- (C.north);
   \draw[->] (BI.south) -- (B.north);
+  \draw[->] (AI.south) -- (CI.north);
   \draw[->] (AI.south) -- (A.north);
-  \draw (D.south) -- (Dl.south);
   %niv 2-3
   \draw[->] (A.south) -- (C.north);
   \draw[->] (B.south) -- (C.north);
-  \draw[->] (Dl.south) -- (C.north);
   %niv 3-4
   \draw[->] (C.south) -- (E.north);
 \end{tikzpicture}
 \section{Niveau de test}
 \begin{tabular}{|c|c|}
   \hline
-  Niveau de test & classes                                                                \\ \hline
-  1              & LinkedListInterface, Operator, SetCalculatorInterface, MyListInterface \\ \hline
-  2              & MyList, SetCalculator                                                  \\ \hline
-  3              & LinkedList                                                             \\ \hline
-  4              & main                                                                   \\ \hline
+  Niveau de test & classes                                    \\ \hline
+  1              & SetCalculatorInterface, MyListInterface    \\ \hline
+  2              & MyList, SetCalculator, LinkedListInterface \\ \hline
+  3              & LinkedList                                 \\ \hline
+  4              & main                                       \\ \hline
 \end{tabular}
 
 
