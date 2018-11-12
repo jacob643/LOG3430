@@ -23,11 +23,11 @@
 \begin{document}
 \maketitle
 \section{Choix des États}
-Nous avons décider de faire un un total de 3 états soit : un état vide, un état avec un seul élement,un element lorsque la file contient 2 éléments ou plus.
-Le choix de ces états ces surtout basée sur les propriété de first et last de la file.
-En effet, dans le premier état, first et last ne sont pas défini et accédé a leur valeur retourne une erreur.
-Dans le second état, ils sont défini, mais on la même valeur.
-Dans le dernier état, ils sont différents(pointe vers 2 élément différents).
+Nous avons décidé de faire un total de 3 états soit : un état vide, un état avec un seul élément,un élément lorsque la file contient 2 éléments ou plus.
+Le choix de ces états ses surtout basée sur les propriétés de first et last de la file.
+En effet, dans le premier état, first et last ne sont pas défini et accéder à leur valeur retourne une erreur.
+Dans le second état, ils sont définis, mais ont la même valeur.
+Dans le dernier état, ils sont différents(pointe vers 2 éléments différents).
 Dans le diagramme des états ci-dessous, on peut voir toutes les transitions entre les états.
 Il est important de noter que seulement 2 méthodes peuvent modifier les états de la file soit enqueue et dequeue
 \subsection{Diagramme des États}
@@ -81,8 +81,8 @@ Il est important de noter que seulement 2 méthodes peuvent modifier les états 
 
 \newpage
 \subsection{Diagramme des passage d'états}
-dans le schémas à la figure 2, on peut observer que l'arbre contient six branches finales en partant de son initialisation.
-\begin{figure}[!h]
+dans le schéma à la figure 2, on peut observer que l'arbre contient cinq noeud finaux (feuilles) en partant de son initialisation.
+\begin{figure}[H]
   \begin{center}
     \begin{forest}
       [create
@@ -102,7 +102,7 @@ dans le schémas à la figure 2, on peut observer que l'arbre contient six branc
   \end{center}
   \caption{Passage des états}
 \end{figure}
-on obtient alors les 5 tests suivant :
+On obtient alors les 5 tests suivant :
 \begin{enumerate}
   \item create$\rightarrow$[Empty].dequeue$\rightarrow$[Empty]
   \item create$\rightarrow$[Empty].enqueue$\rightarrow$[One Node].dequeue$\rightarrow$[Empty]
