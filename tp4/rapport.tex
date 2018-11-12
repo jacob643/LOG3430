@@ -1,5 +1,14 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{forest}
+\usepackage{graphicx}
+\graphicspath{{image/}}
+\usepackage[utf8]{inputenc}
+\usepackage{titlepage}
+\title{TP4}
+\subtitle{Test Basés sur les états}
+\dateremise{le lundi 12 novembre}
+\author{Jacob Dorais}{Billy Bouchard}{Gr 02}
+\prof{Hiba Bagane}
 \forestset{qtree/.style={for tree={parent anchor=south, child anchor=north,align=center,inner sep=0pt}}}
 \usepackage{geometry}
 \geometry{
@@ -10,9 +19,9 @@
 \usepackage{tikz}
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{float}
 \begin{document}
-
+\maketitle
 \section{Choix des États}
 Nous avons décider de faire un un total de 3 états soit : un état vide, un état avec un seul élement,un element lorsque la file contient plus que 3 éléments.
 Le choix de ces états ces surtout basée sur les propriété de first et last de la file.
