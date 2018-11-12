@@ -23,7 +23,7 @@
 \begin{document}
 \maketitle
 \section{Choix des États}
-Nous avons décider de faire un un total de 3 états soit : un état vide, un état avec un seul élement,un element lorsque la file contient plus que 3 éléments.
+Nous avons décider de faire un un total de 3 états soit : un état vide, un état avec un seul élement,un element lorsque la file contient 2 éléments ou plus.
 Le choix de ces états ces surtout basée sur les propriété de first et last de la file.
 En effet, dans le premier état, first et last ne sont pas défini et accédé a leur valeur retourne une erreur.
 Dans le second état, ils sont défini, mais on la même valeur.
@@ -89,10 +89,8 @@ dans le schémas à la figure 2, on peut observer que l'arbre contient six branc
           [Empty
               [One Node, edge label={node[midway,left,font=\scriptsize]{enqueue()}}
                   [Multi Node,edge label={node[midway,left,font=\scriptsize]{enqueue()}}
-                      [Multi Node,edge label={node[midway,left,font=\scriptsize]{\begin{tabular}{l}
-                                  enqueue() \\
-                                  dequeue() $[n>2]$
-                                \end{tabular}}} ]
+                      [Multi Node,edge label={node[midway,left,font=\scriptsize]{dequeue() $[n>2]$}}]
+                      [Multi Node,edge label={node[midway,centered,font=\scriptsize]{enqueue()}}]
                       [One Node,edge label={node[midway,right,font=\scriptsize]{dequeue() $[n=2]$}} ]
                   ]
                   [Empty, edge label={node[midway,right,font=\scriptsize]{dequeue()}}]
