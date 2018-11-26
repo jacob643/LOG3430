@@ -20,7 +20,7 @@ import main.SetCalculatorInterface;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class test_linkedList {
-	
+
 	MyListInterface myList = new MyList();
 	LinkedListInterface list;
 	ArrayList<Object> val1;
@@ -31,7 +31,7 @@ public class test_linkedList {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		this.myList = new MyList();
 		this.list = new LinkedList();
 		this.val1 = new ArrayList<Object>();
@@ -43,7 +43,7 @@ public class test_linkedList {
 		this.val1.add(1);
 		this.val1.add(1);
 		this.val1.add(2);
-		
+
 		this.val2.add(1);
 		this.val2.add(1);
 		this.val2.add(5);
@@ -52,9 +52,11 @@ public class test_linkedList {
 
 	@After
 	public void tearDown() throws Exception {
-		
-	}
 
+	}
+	/***********************************************
+	* niveau de test 2
+	***********************************************/
 	//method getAt() from MyList is tested here
 	@Test
 	public void test01() throws Exception {
@@ -120,7 +122,7 @@ public class test_linkedList {
 		result.add(3);
 		assertFalse("val1 is not superset of 3", this.myCalculator.isSuperset(val1, result).get(0).toString() == "true");
 		assertFalse("val1 is not subset of val2", this.myCalculator.isSuperset(val1, val2).get(0).toString() == "true");
-			
+
 	}
 
 	//method isSubset from SetCalculator is tested here
@@ -134,9 +136,9 @@ public class test_linkedList {
 		result.add(3);
 		assertFalse("3 is not subset of val1", this.myCalculator.isSubset(result, val1).get(0).toString() == "true");
 		assertFalse("3 is not subset of val2", this.myCalculator.isSubset(result, val2).get(0).toString() == "true");
-			
+
 	}
-	
+
 	//method symDifference from SetCalculator is tested here
 	@Test
 	public void test09() throws Exception {
@@ -144,9 +146,9 @@ public class test_linkedList {
 		assertTrue("items of result should be in val1", result.contains(2));
 		assertTrue("items of result should be in val1", result.contains(4));
 		assertTrue("items of result should be in val1", result.contains(5));
-			
+
 	}
-	
+
 	//method difference from SetCalculator is tested here
 	@Test
 	public void test10() throws Exception {
@@ -179,7 +181,10 @@ public class test_linkedList {
 			assertTrue("items of val2 should be in result", result.contains(val2.get(i)));
 		}
 	}
-			
+
+	/***********************************************
+	* niveau de test 3
+	***********************************************/
 	//method build from linkedlist is tested here
 	@Test
 	public void test13() throws Exception {
@@ -190,13 +195,13 @@ public class test_linkedList {
 		result.add(2);
 		result.add(5);
 		result.add(5);
-		
+
 		this.myList = this.list.build(Operator.UNION, this.val1, this.val2);
-		
+
 		assertEquals("should have size of expected result", result.size(), this.myList.getAt(2).size());
 		for(int i = 0; i < result.size(); i++) {
 			assertEquals("should be same data", result.get(i), this.myList.getAt(2).get(i));
 		}
-		
+
 	}
 }
