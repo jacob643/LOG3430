@@ -70,6 +70,7 @@ public class LinkedList implements LinkedListInterface
       break;
     }
 
+    list.setAt(sort(list.getAt(i), isAscending ), i);
     return list;
   }
 
@@ -84,7 +85,7 @@ public class LinkedList implements LinkedListInterface
           if (a.hashCode() == b.hashCode()) {
             return 0;
           }
-          return a.hashCode() < b.hashCode() ? 1 : -1;
+          return a.hashCode() < b.hashCode() ? -1 : 1;
         }
       };
     } else {
@@ -95,7 +96,7 @@ public class LinkedList implements LinkedListInterface
           if (a.hashCode() == b.hashCode()) {
             return 0;
           }
-          return a.hashCode() < b.hashCode() ? -1 : 1;
+          return a.hashCode() < b.hashCode() ? 1 : -1;
         }
       };
     }
