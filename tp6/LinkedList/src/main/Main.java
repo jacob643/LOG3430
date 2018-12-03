@@ -26,7 +26,7 @@ public class Main
     MyListInterface list = new MyList();
     LinkedListInterface suiteChainee = new LinkedList();
 
-    list = suiteChainee.build(Operator.UNION, val1, val2, true);
+    list = suiteChainee.build(Operator.UNION, val1, val2, false);
 
     //////////////////////// Display Result ///////////////////////
     StringBuilder stringContent = new StringBuilder();
